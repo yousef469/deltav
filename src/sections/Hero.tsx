@@ -58,9 +58,28 @@ export function Hero({ onStart }: HeroProps) {
                     <Button size="lg" className="group" onClick={onStart}>
                         Start Your Experience <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
-                    <Button variant="secondary" size="lg">
-                        View Capabilities
-                    </Button>
+                    <a href="/nova-v1.apk" download>
+                        <Button variant="secondary" size="lg" className="group border-brand-accent/30 hover:border-brand-accent/60 transition-colors">
+                            <span className="flex items-center gap-2">
+                                Download Nova v1.0 APK
+                                <div className="p-1 bg-brand-accent/10 rounded-full group-hover:bg-brand-accent/20 transition-colors">
+                                    <ChevronDown className="w-3 h-3 text-brand-accent" />
+                                </div>
+                            </span>
+                        </Button>
+                    </a>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2 }}
+                    className="mt-12 flex items-center justify-center gap-6"
+                >
+                    <div className="px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center gap-3">
+                        <div className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+                        <span className="text-xs font-mono uppercase tracking-widest text-white/50">NEW: NOVA AI OFFLINE ASSISTANT</span>
+                    </div>
                 </motion.div>
             </div>
 

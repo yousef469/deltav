@@ -8,6 +8,7 @@ const navLinks = [
     { name: "Services", href: "#services" },
     { name: "Philosophy", href: "#philosophy" },
     { name: "Work", href: "#work" },
+    { name: "Nova (APK)", href: "/nova-v1.apk" },
 ]
 
 export function Navbar() {
