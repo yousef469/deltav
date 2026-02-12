@@ -55,13 +55,14 @@ export function Hero({ onStart }: HeroProps) {
                     transition={{ delay: 0.8, duration: 0.8 }}
                     className="flex flex-col md:flex-row gap-4 justify-center pt-8"
                 >
+                    {/* Nova v3.0 Release Deployment */}
                     <Button size="lg" className="group" onClick={onStart}>
                         Start Your Experience <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
-                    <a href="https://github.com/yousef469/deltav/releases/download/v2.0/app-debug.apk" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/yousef469/deltav/releases/download/v3.0/app-debug.apk" target="_blank" rel="noopener noreferrer">
                         <Button variant="secondary" size="lg" className="group border-brand-accent/30 hover:border-brand-accent/60 transition-colors">
                             <span className="flex items-center gap-2">
-                                Download Nova v2.0 APK
+                                Download Nova v3.0 APK
                                 <div className="p-1 bg-brand-accent/10 rounded-full group-hover:bg-brand-accent/20 transition-colors">
                                     <ChevronDown className="w-3 h-3 text-brand-accent" />
                                 </div>
