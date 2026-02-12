@@ -62,7 +62,7 @@ export function Hero({ onStart }: HeroProps) {
                     <a href="https://github.com/yousef469/deltav/releases/download/v20.0/app-debug.apk" target="_blank" rel="noopener noreferrer">
                         <Button variant="secondary" size="lg" className="group border-brand-accent/30 hover:border-brand-accent/60 transition-colors">
                             <span className="flex items-center gap-2">
-                                Download Nova v20.0 APK
+                                Download Nova v22.0 (Great Library)
                                 <div className="p-1 bg-brand-accent/10 rounded-full group-hover:bg-brand-accent/20 transition-colors">
                                     <ChevronDown className="w-3 h-3 text-brand-accent" />
                                 </div>
