@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.nova.app-merged_res-34:/drawable_main_gradient_bg.xml.flat",
+        "source": "com.nova.app-main-36:/drawable/main_gradient_bg.xml"
+    },
+    {
+        "merged": "com.nova.app-merged_res-34:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.nova.app-main-36:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.nova.app-merged_res-34:/drawable_ptt_button_bg.xml.flat",
+        "source": "com.nova.app-main-36:/drawable/ptt_button_bg.xml"
+    },
+    {
+        "merged": "com.nova.app-merged_res-34:/layout_activity_main.xml.flat",
+        "source": "com.nova.app-main-36:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.nova.app-merged_res-34:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.nova.app-main-36:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.nova.app-merged_res-34:/layout_activity_navigator.xml.flat",
+        "source": "com.nova.app-main-36:/layout/activity_navigator.xml"
+    }
+]

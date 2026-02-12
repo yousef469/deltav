@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.nova.app-mergeDebugResources-33:/layout/activity_main.xml",
+        "source": "com.nova.app-main-36:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.nova.app-mergeDebugResources-33:/layout/activity_navigator.xml",
+        "source": "com.nova.app-main-36:/layout/activity_navigator.xml"
+    }
+]
