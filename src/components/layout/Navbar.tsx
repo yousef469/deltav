@@ -8,7 +8,7 @@ const navLinks = [
     { name: "Services", href: "#services" },
     { name: "Philosophy", href: "#philosophy" },
     { name: "Work", href: "#work" },
-    { name: "Nova (APK)", href: "https://github.com/yousef469/deltav/releases/download/v6.0/app-debug.apk" },
+    { name: "Nova (APK)", href: "https://github.com/yousef469/deltav/releases/download/v8.0/app-debug.apk" },
 ]
 
 export function Navbar() {
