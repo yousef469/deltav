@@ -1,4 +1,7 @@
-# NOVA: The Offline Survival & Knowledge Ark (v1.3)
+# NOVA: The Offline Survival & Knowledge Ark (v1.5)
+
+> [!IMPORTANT]
+> **Disclaimer**: Nova provides guidance, not professional medical advice. In emergencies, contact local authorities when possible.
 
 ## Project Overview
 **Nova** is a high-resilience, offline-first Android application designed for disaster recovery, long-term survival, and educational preservation. It serves as a decentralized "Library of Alexandria" and an active emergency response toolkit.
@@ -10,27 +13,19 @@
 ### 1. 🚨 Emergency & Rescue Sentinel
 A mission-critical suite for life-saving actions.
 - **Decision Engines**: Branching "Yes/No" logic for Medical Emergencies (Bleeding, CPR, Heat Stroke) and Wilderness Survival (Lost).
-- **Signal Sentinel**: A foreground service that monitors network connectivity and triggers a high-volume alarm when a signal is detected, allowing for sleep in survival zones.
-- **Global Rescue Index**: Hardcoded database of world-wide civilization centers. The app calculates the nearest rescue point and provides a visual vector on the map.
+- **Signal Sentinel**: Monitors network connectivity and triggers a high-volume alarm when a signal is detected.
+- **Global Rescue Index**: Calculates nearest rescue point with a visual vector on the map.
 
 ### 2. 🗺️ Offline Intelligence (Navigator)
-- **OSM Mapping**: Full offline map rendering using OpenStreetMap (OSMDroid).
-- **Celestial Navigation**: High-contrast compass overlay with real-time solar/lunar position tracking logic.
+- **OSM Mapping**: Full offline map rendering using OpenStreetMap.
+- **✨ Celestial Guidance**: Integrated star-based bearing logic. It guides users to rescue points by referencing the **North Star (Polaris)** or **Southern Cross**, providing simple "Right/Left" instructions.
 
-### 3. 🛠️ Action Tool Suite (The "Swiss Army" Layer)
-Active interactions with the physical environment:
-- **🔊 Sound Beacon**: Emits a localized acoustic signature for rescue team locating.
-- **🧭 Direction Lock**: Allows a user to "Lock" a cardinal direction (e.g., base camp) and receive directional offset guidance ("Turn 45° Left") without needing GPS or Data.
-- **💧 Hydration Timer**: A background coroutine-based system that manages consistent water intake reminders.
-
-### 4. 📚 Education & Rebuilding Suite
-A comprehensive knowledge vault for maintaining human progress:
-- **Math**: Educational curriculum spanning from Grade 5 basics to Advanced Calculus and Linear Algebra.
-- **Physics & Engineering**: Coverage of Newton's Laws, Thermodynamics, and Mechanical Engineering (Stress, Strain, Torque).
-- **Coding Bootcamp**: 
-    - **Python**: Variables, Loops, Functions, and OOP principles.
-    - **Java**: Statically typed syntax, Methods, and Classes.
-- **Logic Training**: A fully functional 2-player local **Chess Engine** with move validation and capture logic.
+### 3. 📚 Knowledge & Survival Vaults
+- **🌾 Farming**: Deep knowledge on soil nitrogen fix, high-yield survival crops (Potatoes), and drip irrigation.
+- **⚙️ Repairing**: Survival mechanics including rope knots, shelter frame building, and charcoal water filtration.
+- **📐 Education**: Curriculum spanning Grade 5 to Advanced Calculus and Mechanical Engineering.
+- **💻 Coding Bootcamp**: Python and Java basics.
+- **♟️ Logic Training**: 2-player local Chess engine.
 
 ---
 

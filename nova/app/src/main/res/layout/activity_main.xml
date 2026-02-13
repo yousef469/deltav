@@ -142,25 +142,6 @@
                 android:layout_marginHorizontal="8dp"
                 android:columnCount="2">
 
-                <!-- MEDICAL -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardMedical"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#1AFFFFFF"
-                    app:cardCornerRadius="16dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚑" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MEDICAL" android:textColor="#FFFFFF" android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
                 <!-- FARMING -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardFarming"
@@ -180,28 +161,9 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- ASTRONOMY -->
+                <!-- REPAIRING (Previously Mechanic) -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardNav"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#1AFFFFFF"
-                    app:cardCornerRadius="16dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔭" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="STARS" android:textColor="#FFFFFF" android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- MECHANICAL -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardMechanical"
+                    android:id="@+id/cardManualRepair"
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
@@ -214,7 +176,26 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚙️" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MECHANIC" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPAIRING" android:textColor="#FFFFFF" android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- MEDICAL -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardMedical"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="#1AFFFFFF"
+                    app:cardCornerRadius="16dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚑" android:textSize="32sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MEDICAL" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -313,6 +294,17 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 
+                <!-- DISCLAIMER -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="Nova provides guidance, not professional medical advice.\nIn emergencies, contact local authorities when possible."
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="10sp"
+                    android:textAlignment="center"
+                    android:alpha="0.6"/>
+                    
             </GridLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

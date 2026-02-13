@@ -105,16 +105,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         // Dashboard Categories
+        binding.cardFarming.setOnClickListener { 
+            startActivity(android.content.Intent(this, com.nova.core.FarmingActivity::class.java))
+        }
+        binding.cardManualRepair.setOnClickListener { 
+            startActivity(android.content.Intent(this, com.nova.core.RepairingActivity::class.java))
+        }
         binding.cardMedical.setOnClickListener { switchToMode(AppMode.MEDICAL) }
-        binding.cardFarming.setOnClickListener { switchToMode(AppMode.FARMING) }
-        binding.cardNav.setOnClickListener { switchToMode(AppMode.ASTRONOMY) }
         
         // NEW: Top Emergency Card
         binding.cardEmergencyTop.setOnClickListener { 
             showEmergencyDashboard()
         }
 
-        binding.cardMechanical.setOnClickListener { switchToMode(AppMode.MECHANICAL) }
         binding.cardNavigator.setOnClickListener {
             android.content.Intent(this, NavigatorActivity::class.java).also {
                 startActivity(it)
