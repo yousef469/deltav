@@ -41,6 +41,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/titleText"
         app:layout_constraintBottom_toTopOf="@id/manualInputOverlay"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +74,7 @@
                         android:textSize="32sp" 
                         android:layout_marginEnd="16dp"/>
                     <TextView 
+                        android:id="@+id/textEmergencyTitle"
                         android:layout_width="wrap_content" 
                         android:layout_height="wrap_content" 
                         android:text="EMERGENCY / SOS" 
@@ -82,6 +84,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- 2. AI CARD -->
             <!-- 2. AI CARD -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/aiCard"
@@ -134,13 +137,14 @@
                         android:visibility="gone" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
             <!-- 3. MAIN GRID -->
             <GridLayout
+                android:id="@+id/mainDashboardGrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:columnCount="2">
+                android:columnCount="2"
+                android:visibility="visible">
 
                 <!-- FARMING -->
                 <androidx.cardview.widget.CardView
@@ -157,7 +161,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌾" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FARMING" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textFarming" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FARMING" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -176,7 +180,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚙️" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPAIRING" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textRepairing" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPAIRING" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -195,7 +199,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚑" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MEDICAL" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textMedical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MEDICAL" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -214,7 +218,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📚" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="EDUCATION" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textEducation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="EDUCATION" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -233,7 +237,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💻" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CODING" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textCoding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CODING" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -252,7 +256,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="♟️" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CHESS" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textChess" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CHESS" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -271,7 +275,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🗺️" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NAVIGATOR" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textNavigator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NAVIGATOR" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -290,22 +294,22 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔦" android:textSize="32sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TOOLS" android:textColor="#FFFFFF" android:textStyle="bold" />
+                        <TextView android:id="@+id/textTools" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TOOLS" android:textColor="#FFFFFF" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-                
-                <!-- DISCLAIMER -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="Nova provides guidance, not professional medical advice.\nIn emergencies, contact local authorities when possible."
-                    android:textColor="#CCFFFFFF"
-                    android:textSize="10sp"
-                    android:textAlignment="center"
-                    android:alpha="0.6"/>
-                    
             </GridLayout>
+
+            <!-- DISCLAIMER -->
+            <TextView
+                android:id="@+id/textDisclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Nova provides guidance, not professional medical advice.\nIn emergencies, contact local authorities when possible."
+                android:textColor="#CCFFFFFF"
+                android:textSize="10sp"
+                android:textAlignment="center"
+                android:alpha="0.6"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

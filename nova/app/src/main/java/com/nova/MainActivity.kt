@@ -245,6 +245,21 @@ class MainActivity : AppCompatActivity() {
         binding.btnLanguage.text = LanguageManager.currentLanguage.code.uppercase()
         binding.titleText.text = LanguageManager.get("welcome")
         
+        // Dashboard Categories
+        binding.textEmergencyTitle.text = LanguageManager.get("emergency_title")
+        binding.textFarming.text = LanguageManager.get("farming")
+        binding.textRepairing.text = LanguageManager.get("repairing")
+        binding.textMedical.text = LanguageManager.get("medical")
+        binding.textEducation.text = LanguageManager.get("education")
+        binding.textCoding.text = LanguageManager.get("coding")
+        binding.textChess.text = LanguageManager.get("chess")
+        binding.textNavigator.text = LanguageManager.get("navigator")
+        binding.textTools.text = LanguageManager.get("tools")
+        binding.textDisclaimer.text = LanguageManager.get("disclaimer")
+        
+        binding.editManualInput.hint = LanguageManager.get("status_searching") // Reusing searching for hint
+        binding.btnHome.text = "🔙 " + LanguageManager.get("welcome")
+
         // Update mode text if active
         if (currentMode != AppMode.GENERAL) {
              binding.titleText.text = when(currentMode) {
@@ -255,7 +270,7 @@ class MainActivity : AppCompatActivity() {
              }
         }
         
-        if (binding.statusText.text == "Survival Database Ready.") {
+        if (binding.statusText.text == "Survival Database Ready." || binding.statusText.text == "Voice Assistant Ready") {
             binding.statusText.text = LanguageManager.get("status_ready")
         }
     }

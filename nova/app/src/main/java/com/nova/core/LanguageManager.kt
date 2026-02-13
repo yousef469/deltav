@@ -80,6 +80,86 @@ object LanguageManager {
             AppLanguage.SPANISH to "Base de datos lista.",
             AppLanguage.ARABIC to "قاعدة البيانات جاهزة.",
             AppLanguage.FRENCH to "Base de données prête."
+        ),
+        "emergency_title" to mapOf(
+            AppLanguage.ENGLISH to "EMERGENCY / SOS",
+            AppLanguage.ARABIC to "الطوارئ / استغاثة",
+            AppLanguage.SPANISH to "EMERGENCIA / SOS",
+            AppLanguage.CHINESE to "紧急 / SOS",
+            AppLanguage.HINDI to "आपातकाल / SOS",
+            AppLanguage.FRENCH to "URGENCE / SOS"
+        ),
+        "farming" to mapOf(
+            AppLanguage.ENGLISH to "FARMING",
+            AppLanguage.ARABIC to "الزراعة",
+            AppLanguage.SPANISH to "AGRICULTURA",
+            AppLanguage.CHINESE to "农业",
+            AppLanguage.HINDI to "खेती",
+            AppLanguage.FRENCH to "AGRICULTURE"
+        ),
+        "repairing" to mapOf(
+            AppLanguage.ENGLISH to "REPAIRING",
+            AppLanguage.ARABIC to "الإصلاح",
+            AppLanguage.SPANISH to "REPARACIÓN",
+            AppLanguage.CHINESE to "修理",
+            AppLanguage.HINDI to "मरम्मत",
+            AppLanguage.FRENCH to "RÉPARATION"
+        ),
+        "medical" to mapOf(
+            AppLanguage.ENGLISH to "MEDICAL",
+            AppLanguage.ARABIC to "الطبي",
+            AppLanguage.SPANISH to "MÉDICO",
+            AppLanguage.CHINESE to "医疗",
+            AppLanguage.HINDI to "मेडिकल",
+            AppLanguage.FRENCH to "MÉDICAL"
+        ),
+        "education" to mapOf(
+            AppLanguage.ENGLISH to "EDUCATION",
+            AppLanguage.ARABIC to "التعليم",
+            AppLanguage.SPANISH to "EDUCACIÓN",
+            AppLanguage.CHINESE to "教育",
+            AppLanguage.HINDI to "शिक्षा",
+            AppLanguage.FRENCH to "ÉDUCATION"
+        ),
+        "coding" to mapOf(
+            AppLanguage.ENGLISH to "CODING",
+            AppLanguage.ARABIC to "البرمجة",
+            AppLanguage.SPANISH to "PROGRAMACIÓN",
+            AppLanguage.CHINESE to "编程",
+            AppLanguage.HINDI to "कोडिंग",
+            AppLanguage.FRENCH to "CODAGE"
+        ),
+        "chess" to mapOf(
+            AppLanguage.ENGLISH to "CHESS",
+            AppLanguage.ARABIC to "شطرنج",
+            AppLanguage.SPANISH to "AJEDREZ",
+            AppLanguage.CHINESE to "象棋",
+            AppLanguage.HINDI to "शतरंज",
+            AppLanguage.FRENCH to "ÉCHECS"
+        ),
+        "navigator" to mapOf(
+            AppLanguage.ENGLISH to "NAVIGATOR",
+            AppLanguage.ARABIC to "الملاح",
+            AppLanguage.SPANISH to "NAVEGADOR",
+            AppLanguage.CHINESE to "导航员",
+            AppLanguage.HINDI to "नेविगेटर",
+            AppLanguage.FRENCH to "NAVIGATEUR"
+        ),
+        "tools" to mapOf(
+            AppLanguage.ENGLISH to "TOOLS",
+            AppLanguage.ARABIC to "الأدوات",
+            AppLanguage.SPANISH to "HERRAMIENTAS",
+            AppLanguage.CHINESE to "工具",
+            AppLanguage.HINDI to "उपकरण",
+            AppLanguage.FRENCH to "OUTILS"
+        ),
+        "disclaimer" to mapOf(
+            AppLanguage.ENGLISH to "Nova provides guidance, not professional medical advice.\nIn emergencies, contact local authorities when possible.",
+            AppLanguage.ARABIC to "نوفا توفر التوجيه، وليس المشورة الطبية المهنية.\nفي حالات الطوارئ، اتصل بالسلطات المحلية عندما يكون ذلك ممكنًا.",
+            AppLanguage.SPANISH to "Nova brinda orientación, no asesoramiento médico profesional.\nEn emergencias, contacte a las autoridades locales cuando sea posible.",
+            AppLanguage.CHINESE to "Nova 提供指导，而不是专业的医疗建议。\n在紧急情况下，尽可能联系当地当局。",
+            AppLanguage.HINDI to "नोवा मार्गदर्शन प्रदान करता है, पेशेवर चिकित्सा सलाह नहीं।\nआपात स्थिति में, जब संभव हो स्थानीय अधिकारियों से संपर्क करें।",
+            AppLanguage.FRENCH to "Nova fournit des conseils et non des avis médicaux professionnels.\nEn cas d'urgence, contactez les autorités locales si possible."
         )
         // Add more keys as needed for UI elements
     )
