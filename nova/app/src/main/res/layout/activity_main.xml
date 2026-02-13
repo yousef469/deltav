@@ -230,6 +230,146 @@
 
     </GridLayout>
 
+    <!-- DECISION TREE OVERLAY -->
+    <LinearLayout
+        android:id="@+id/decisionOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DD000000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/decisionQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:text="Is the bleeding soaking through clothes?"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnNo"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#555555"
+                android:text="NO"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnYes"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:backgroundTint="#FF3333"
+                android:text="YES"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/btnDecisionReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Restart Flow"
+            android:textSize="14sp"
+            android:backgroundTint="#33FFFFFF"/>
+    </LinearLayout>
+
+    <!-- EMERGENCY DASHBOARD (Big Buttons) -->
+    <LinearLayout
+        android:id="@+id/emergencyDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF111111"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🚨 EMERGENCY"
+            android:textColor="#FF5555"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnEmBleeding"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#99FF3333"
+            android:text="🩸 BLEEDING"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnEmUnconscious"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#993333FF"
+            android:text="💤 UNCONSCIOUS"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+            
+        <Button
+            android:id="@+id/btnEmHeat"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#99FF9900"
+            android:text="☀️ HEAT STROKE"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnEmLost"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#99999999"
+            android:text="🌲 LOST / DIRECTION"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnEmSentinel"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#990000FF"
+            android:text="📡 SIGNAL WAKE-UP"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnEmBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="◀ CANCEL"
+            android:textColor="#AAAAAA"
+            android:backgroundTint="#33FFFFFF"/>
+    </LinearLayout>
+
     <!-- COMPASS OVERLAY (Hidden by default) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/compassOverlay"

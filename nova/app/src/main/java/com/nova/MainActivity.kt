@@ -65,28 +65,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (binding.decisionOverlay.visibility == android.view.View.VISIBLE) {
+            endDecisionFlow()
+            return
+        }
+        if (binding.emergencyDashboard.visibility == android.view.View.VISIBLE) {
+            binding.emergencyDashboard.visibility = android.view.View.GONE
+            return
+        }
+        if (currentMode != AppMode.GENERAL) {
+            exitMode()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun setupListeners() {
         // Dashboard Categories
-        binding.cardMedical.setOnClickListener {
-            switchToMode(AppMode.MEDICAL)
+        binding.cardMedical.setOnClickListener { switchToMode(AppMode.MEDICAL) }
+        binding.cardFarming.setOnClickListener { switchToMode(AppMode.FARMING) }
+        binding.cardNav.setOnClickListener { switchToMode(AppMode.ASTRONOMY) }
+        
+        // SOS Button -> Emergency Dashboard
+        binding.cardSOS.setOnClickListener { 
+            showEmergencyDashboard()
         }
 
-        binding.cardFarming.setOnClickListener {
-            switchToMode(AppMode.FARMING)
-        }
-
-        binding.cardNav.setOnClickListener {
-            switchToMode(AppMode.ASTRONOMY)
-        }
-
-        binding.cardSOS.setOnClickListener {
-            switchToMode(AppMode.SOS)
-        }
-
-        binding.cardMechanical.setOnClickListener {
-            switchToMode(AppMode.MECHANICAL)
-        }
-
+        binding.cardMechanical.setOnClickListener { switchToMode(AppMode.MECHANICAL) }
         binding.cardNavigator.setOnClickListener {
             android.content.Intent(this, NavigatorActivity::class.java).also {
                 startActivity(it)
@@ -94,13 +100,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cardTools.setOnClickListener {
-            switchToMode(AppMode.GENERAL) // Re-using general for tools view
+            switchToMode(AppMode.GENERAL)
             showToolsDashboard()
         }
 
-        binding.btnHome.setOnClickListener {
-            exitMode()
-        }
+        binding.btnHome.setOnClickListener { exitMode() }
 
         binding.btnSendText.setOnClickListener {
             val query = binding.editManualInput.text.toString()
@@ -108,9 +112,87 @@ class MainActivity : AppCompatActivity() {
                 handleTextQuery(query)
             }
         }
+        
+        // Emergency Dashboard Listeners
+        binding.btnEmBleeding.setOnClickListener { startDecisionFlow("bleeding") }
+        binding.btnEmUnconscious.setOnClickListener { startDecisionFlow("cpr") }
+        binding.btnEmHeat.setOnClickListener { startDecisionFlow("heat_stroke") }
+        binding.btnEmLost.setOnClickListener { startDecisionFlow("lost") }
+        binding.btnEmSentinel.setOnClickListener { 
+            val intent = android.content.Intent(this, com.nova.core.SignalMonitorService::class.java)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
+            android.widget.Toast.makeText(this, "SENTINEL ACTIVE: Sleeping...", android.widget.Toast.LENGTH_LONG).show()
+            binding.emergencyDashboard.visibility = android.view.View.GONE
+        }
+        binding.btnEmBack.setOnClickListener { binding.emergencyDashboard.visibility = android.view.View.GONE }
+        
+        // Decision Tree Listeners
+        binding.btnYes.setOnClickListener { processDecision(true) }
+        binding.btnNo.setOnClickListener { processDecision(false) }
+        binding.btnDecisionReset.setOnClickListener { endDecisionFlow() }
 
-        // Voice button is disabled in UI but we'll clear listener to be safe
         binding.pttButton.setOnTouchListener(null)
+    }
+
+    private fun showEmergencyDashboard() {
+        binding.emergencyDashboard.visibility = android.view.View.VISIBLE
+        binding.emergencyDashboard.bringToFront()
+    }
+
+    private fun startDecisionFlow(treeId: String) {
+        val rootNode = DecisionEngine.startTree(treeId)
+        if (rootNode != null) {
+            binding.emergencyDashboard.visibility = android.view.View.GONE
+            binding.decisionOverlay.visibility = android.view.View.VISIBLE
+            binding.decisionOverlay.bringToFront()
+            displayNode(rootNode)
+        }
+    }
+
+    private fun processDecision(yes: Boolean) {
+        val nextNode = DecisionEngine.processAnswer(yes)
+        if (nextNode != null) {
+            displayNode(nextNode)
+        } else {
+            // End of flow?
+        }
+    }
+
+    private fun displayNode(node: DecisionNode) {
+        binding.decisionQuestion.text = node.text
+        
+        if (node.type == DecisionType.END || node.type == DecisionType.ACTION) {
+             binding.btnYes.visibility = android.view.View.GONE
+             binding.btnNo.visibility = android.view.View.GONE
+             binding.btnDecisionReset.visibility = android.view.View.VISIBLE
+             
+             if (node.type == DecisionType.ACTION) {
+                 // Actions might have a "Next" but for now we treat them as endpoints or auto-advance
+                 // For simplified UI, if it's an action that leads to another question (like CPR start), 
+                 // we might need a "NEXT" button. 
+                 // Updating DecisionEngine to handle ACTION types better if they aren't END.
+                 if (node.yesNodeId != null) {
+                      binding.btnYes.visibility = android.view.View.VISIBLE
+                      binding.btnYes.text = "NEXT >"
+                      binding.btnNo.visibility = android.view.View.GONE
+                 }
+             }
+        } else {
+            binding.btnYes.visibility = android.view.View.VISIBLE
+            binding.btnNo.visibility = android.view.View.VISIBLE
+            binding.btnYes.text = "YES"
+            binding.btnNo.text = "NO"
+            binding.btnDecisionReset.visibility = android.view.View.GONE
+        }
+    }
+
+    private fun endDecisionFlow() {
+        binding.decisionOverlay.visibility = android.view.View.GONE
+        binding.emergencyDashboard.visibility = android.view.View.VISIBLE // Go back to dashboard
     }
 
     private fun handleTextQuery(query: String) {

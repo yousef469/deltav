@@ -13,6 +13,8 @@ import com.nova.databinding.ActivityNavigatorBinding
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
+import com.nova.core.RescuePoint
+import com.nova.core.RescueEngine
 import org.osmdroid.views.overlay.Marker
 
 class NavigatorActivity : AppCompatActivity() {
@@ -78,18 +80,40 @@ class NavigatorActivity : AppCompatActivity() {
         binding.coordinatesText.text = String.format("Lat: %.4f, Lon: %.4f", lat, lon)
         
         val zone = identifyZone(lat, lon)
-        binding.currentZoneText.text = "📍 $zone"
+        
+        // Anti-Gravity Rescue Logic
+        val (rescuePoint, distanceKm) = com.nova.core.RescueEngine.findNearestCivilization(lat, lon)
+        binding.currentZoneText.text = "📍 $zone\n🚑 NEAREST RESCUE: ${rescuePoint.name} (${String.format("%.1f", distanceKm)} km)"
 
         val point = GeoPoint(lat, lon)
         binding.mapView.controller.setCenter(point)
         
-        // Add Marker
+        // Clear previous overlays
+        binding.mapView.overlays.clear()
+        
+        // 1. Current Position Marker
         val marker = Marker(binding.mapView)
         marker.position = point
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        marker.title = "Current Survival Context: $zone"
-        binding.mapView.overlays.clear()
+        marker.title = "YOU ARE HERE"
         binding.mapView.overlays.add(marker)
+        
+        // 2. Rescue Line
+        val rescueGeo = GeoPoint(rescuePoint.lat, rescuePoint.lon)
+        val line = org.osmdroid.views.overlay.Polyline()
+        line.setPoints(listOf(point, rescueGeo))
+        line.color = android.graphics.Color.CYAN
+        line.width = 5.0f
+        binding.mapView.overlays.add(line)
+        
+        // 3. Rescue Marker
+        val rescueMarker = Marker(binding.mapView)
+        rescueMarker.position = rescueGeo
+        rescueMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        rescueMarker.title = "RESCUE: ${rescuePoint.name}"
+        rescueMarker.icon = androidx.core.content.ContextCompat.getDrawable(this, android.R.drawable.ic_menu_compass) // Fallback icon
+        binding.mapView.overlays.add(rescueMarker)
+
         binding.mapView.invalidate()
     }
 
