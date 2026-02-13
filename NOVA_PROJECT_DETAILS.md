@@ -1,4 +1,4 @@
-# NOVA: The Offline Survival & Knowledge Ark (v1.7)
+# NOVA: The Offline Survival & Knowledge Ark (v1.7.1)
 
 > [!IMPORTANT]
 > **Disclaimer**: Nova provides guidance, not professional medical advice. In emergencies, contact local authorities when possible.

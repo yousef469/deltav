@@ -14,6 +14,12 @@ class SurvivalActions(private val context: Context) {
     private val scope = CoroutineScope(Dispatchers.Main)
     private val toneGenerator = ToneGenerator(AudioManager.STREAM_ALARM, 100)
 
+    private fun maximizeVolume() {
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0)
+    }
+
     fun toggleBeacon(onUpdate: (Boolean) -> Unit) {
         isBeaconActive = !isBeaconActive
         if (isBeaconActive) {
@@ -25,6 +31,7 @@ class SurvivalActions(private val context: Context) {
     }
 
     private fun startBeacon() {
+        maximizeVolume()
         beaconJob = scope.launch(Dispatchers.IO) {
             while (isActive && isBeaconActive) {
                 // SOS Pattern: 3 Short, 3 Long, 3 Short
@@ -44,6 +51,7 @@ class SurvivalActions(private val context: Context) {
 
     fun playEmergencyBeep(on: Boolean) {
         if (on) {
+            maximizeVolume()
             toneGenerator.startTone(ToneGenerator.TONE_CDMA_EMERGENCY_RINGBACK, 5000)
         } else {
             toneGenerator.stopTone()

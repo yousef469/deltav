@@ -56,7 +56,7 @@ Nova is built to run on "The Last Device."
 
 ---
 
-## 📊 Final Performance Metrics (v1.3)
+## 📊 Final Performance Metrics (v1.7)
 - **Binary Size (APK)**: **6.7 MB**
 - **Cold Boot Time**: < 1.2 Seconds
 - **RAM Footprint**: **~150MB** (Runtime Average)
@@ -69,6 +69,6 @@ Nova is built to run on "The Last Device."
 - **v26.0**: Integrated "Emergency Sentinel" and Decision Trees.
 - **v27.0**: Deployed "Action Tools" and Multi-language support.
 - **v28.0 (Internal)**: Final Education and Chess expansion.
-- **v1.3 (Final)**: Rebranded, Optimized, and Documented.
+- **v1.7 (Final)**: Synchronized SOS Morse & Internal Branding.
 
 **Nova is the definitive tool for the resilient human.** Amaze. 🌌

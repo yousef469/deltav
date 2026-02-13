@@ -24,6 +24,12 @@ class SignalMonitorService : Service() {
     private val scope = CoroutineScope(Dispatchers.Default)
     private var toneGenerator: ToneGenerator? = null
 
+    private fun maximizeVolume() {
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0)
+    }
+
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
@@ -65,6 +71,7 @@ class SignalMonitorService : Service() {
 
     private fun triggerAlarm() {
         // WAKE UP!
+        maximizeVolume()
         repeat(5) {
             toneGenerator?.startTone(ToneGenerator.TONE_CDMA_EMERGENCY_RINGBACK, 1000)
             Thread.sleep(1200)
