@@ -22,7 +22,7 @@ A mission-critical suite for life-saving actions.
 
 ### 3. 📚 Knowledge & Survival Vaults
 - **🌾 Farming**: Deep knowledge on soil nitrogen fix, high-yield survival crops (Potatoes), and drip irrigation.
-- **⚙️ Repairing**: Survival mechanics including rope knots, shelter frame building, and charcoal water filtration.
+- **⚙️ Repairing**: Survival mechanics includiDownload Nova v1.5 (Legal & Visual Update)ng rope knots, shelter frame building, and charcoal water filtration.
 - **📐 Education**: Curriculum spanning Grade 5 to Advanced Calculus and Mechanical Engineering.
 - **💻 Coding Bootcamp**: Python and Java basics.
 - **♟️ Logic Training**: 2-player local Chess engine.
