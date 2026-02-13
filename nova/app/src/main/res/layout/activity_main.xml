@@ -7,6 +7,20 @@
     android:background="@drawable/main_gradient_bg"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btnLanguage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="#33FFFFFF"
+        android:text="EN"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -366,6 +380,76 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="◀ CANCEL"
+            android:textColor="#AAAAAA"
+            android:backgroundTint="#33FFFFFF"/>
+    </LinearLayout>
+
+    <!-- TOOLS DASHBOARD -->
+    <LinearLayout
+        android:id="@+id/toolsDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF222222"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🛠️ ACTION TOOLS"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnToolBeacon"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#ff9800"
+            android:text="🔊 SOUND BEACON (OFF)"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnToolLock"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#00bcd4"
+            android:text="🧭 LOCK DIRECTION"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textLockGuidance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Lock heading to get return guidance."
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnToolWater"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#2196f3"
+            android:text="💧 WATER TIMER (OFF)"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnToolBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="◀ BACK"
             android:textColor="#AAAAAA"
             android:backgroundTint="#33FFFFFF"/>
     </LinearLayout>

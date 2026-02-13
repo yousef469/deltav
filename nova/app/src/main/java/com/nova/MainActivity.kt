@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var engine: NovaProductionEngine
     private lateinit var compass: SurvivalCompass
     private lateinit var survivalTools: SurvivalTools
+    private lateinit var survivalActions: SurvivalActions
     private var isRecording = false
+    private var isToolsOverlayVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +38,13 @@ class MainActivity : AppCompatActivity() {
         
         compass = SurvivalCompass(this)
         survivalTools = SurvivalTools(this)
+        survivalActions = SurvivalActions(this)
 
         setupCompass()
         setupListeners()
         checkPermissions()
         setupTools()
+        updateLanguageUI()
     }
 
     private fun checkPermissions() {
@@ -62,6 +66,19 @@ class MainActivity : AppCompatActivity() {
         compass.onDirectionChanged = { azimuth, direction ->
             binding.compassDirText.text = direction
             binding.compassNeedle.rotation = -azimuth
+            
+            // Direction Lock Logic
+            if (binding.toolsDashboard.visibility == android.view.View.VISIBLE && binding.textLockGuidance.visibility == android.view.View.VISIBLE) {
+                 val guidance = survivalActions.getReturnGuidance(azimuth)
+                 binding.textLockGuidance.text = guidance
+                 
+                 // Visual feedback for lock
+                 if (guidance.contains("STRAIGHT")) {
+                     binding.textLockGuidance.setTextColor(Color.GREEN)
+                 } else {
+                     binding.textLockGuidance.setTextColor(Color.YELLOW)
+                 }
+            }
         }
     }
 
@@ -72,6 +89,10 @@ class MainActivity : AppCompatActivity() {
         }
         if (binding.emergencyDashboard.visibility == android.view.View.VISIBLE) {
             binding.emergencyDashboard.visibility = android.view.View.GONE
+            return
+        }
+        if (binding.toolsDashboard.visibility == android.view.View.VISIBLE) {
+            closeToolsDashboard()
             return
         }
         if (currentMode != AppMode.GENERAL) {
@@ -100,11 +121,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cardTools.setOnClickListener {
-            switchToMode(AppMode.GENERAL)
             showToolsDashboard()
         }
 
         binding.btnHome.setOnClickListener { exitMode() }
+        
+        // Language Toggle
+        binding.btnLanguage.setOnClickListener {
+            LanguageManager.nextLanguage()
+            updateLanguageUI()
+        }
 
         binding.btnSendText.setOnClickListener {
             val query = binding.editManualInput.text.toString()
@@ -134,6 +160,43 @@ class MainActivity : AppCompatActivity() {
         binding.btnYes.setOnClickListener { processDecision(true) }
         binding.btnNo.setOnClickListener { processDecision(false) }
         binding.btnDecisionReset.setOnClickListener { endDecisionFlow() }
+        
+        // Tools Dashboard Listeners
+        binding.btnToolBeacon.setOnClickListener { 
+            survivalActions.toggleBeacon { active ->
+                binding.btnToolBeacon.text = if (active) "🔊 BEACON ACTIVE (STOP)" else "🔊 SOUND BEACON (OFF)"
+                binding.btnToolBeacon.backgroundTintList = android.content.res.ColorStateList.valueOf(if (active) Color.RED else Color.parseColor("#ff9800"))
+            }
+        }
+        
+        binding.btnToolLock.setOnClickListener {
+            if (binding.textLockGuidance.visibility == android.view.View.VISIBLE) {
+                // Unlock
+                survivalActions.clearLock()
+                binding.textLockGuidance.visibility = android.view.View.GONE
+                binding.btnToolLock.text = "🧭 LOCK DIRECTION"
+                binding.btnToolLock.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#00bcd4"))
+            } else {
+                // Lock
+                val currentAzim = -binding.compassNeedle.rotation
+                val msg = survivalActions.lockDirection(currentAzim)
+                binding.textLockGuidance.text = msg
+                binding.textLockGuidance.visibility = android.view.View.VISIBLE
+                binding.btnToolLock.text = "🔓 UNLOCK DIRECTION"
+                binding.btnToolLock.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.GREEN)
+            }
+        }
+        
+        binding.btnToolWater.setOnClickListener {
+            val active = survivalActions.toggleWaterTimer(15) { alert ->
+                android.widget.Toast.makeText(this, alert, android.widget.Toast.LENGTH_LONG).show()
+                // Optionally push a local notification or sound
+            }
+            binding.btnToolWater.text = if (active) "💧 TIMER ACTIVE (15m)" else "💧 WATER TIMER (OFF)"
+            binding.btnToolWater.backgroundTintList = android.content.res.ColorStateList.valueOf(if (active) Color.BLUE else Color.parseColor("#2196f3"))
+        }
+
+        binding.btnToolBack.setOnClickListener { closeToolsDashboard() }
 
         binding.pttButton.setOnTouchListener(null)
     }
@@ -141,6 +204,36 @@ class MainActivity : AppCompatActivity() {
     private fun showEmergencyDashboard() {
         binding.emergencyDashboard.visibility = android.view.View.VISIBLE
         binding.emergencyDashboard.bringToFront()
+    }
+    
+    private fun showToolsDashboard() {
+        binding.toolsDashboard.visibility = android.view.View.VISIBLE
+        binding.toolsDashboard.bringToFront()
+        isToolsOverlayVisible = true
+    }
+
+    private fun closeToolsDashboard() {
+        binding.toolsDashboard.visibility = android.view.View.GONE
+        isToolsOverlayVisible = false
+    }
+
+    private fun updateLanguageUI() {
+        binding.btnLanguage.text = LanguageManager.currentLanguage.code.uppercase()
+        binding.titleText.text = LanguageManager.get("welcome")
+        
+        // Update mode text if active
+        if (currentMode != AppMode.GENERAL) {
+             binding.titleText.text = when(currentMode) {
+                 AppMode.MEDICAL -> LanguageManager.get("medical_mode")
+                 AppMode.FARMING -> LanguageManager.get("farming_mode")
+                 AppMode.SOS -> LanguageManager.get("sos_mode")
+                 else -> "${currentMode.name} MODE"
+             }
+        }
+        
+        if (binding.statusText.text == "Survival Database Ready.") {
+            binding.statusText.text = LanguageManager.get("status_ready")
+        }
     }
 
     private fun startDecisionFlow(treeId: String) {
@@ -158,7 +251,6 @@ class MainActivity : AppCompatActivity() {
         if (nextNode != null) {
             displayNode(nextNode)
         } else {
-            // End of flow?
         }
     }
 
@@ -171,10 +263,6 @@ class MainActivity : AppCompatActivity() {
              binding.btnDecisionReset.visibility = android.view.View.VISIBLE
              
              if (node.type == DecisionType.ACTION) {
-                 // Actions might have a "Next" but for now we treat them as endpoints or auto-advance
-                 // For simplified UI, if it's an action that leads to another question (like CPR start), 
-                 // we might need a "NEXT" button. 
-                 // Updating DecisionEngine to handle ACTION types better if they aren't END.
                  if (node.yesNodeId != null) {
                       binding.btnYes.visibility = android.view.View.VISIBLE
                       binding.btnYes.text = "NEXT >"
@@ -197,7 +285,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleTextQuery(query: String) {
         binding.editManualInput.setText("")
-        binding.statusText.text = "Searching..."
+        binding.statusText.text = LanguageManager.get("status_searching")
         
         lifecycleScope.launch {
             val response = engine.processTextCommand(query)
@@ -213,23 +301,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun showToolsDashboard() {
-        binding.titleText.text = "SURVIVAL TOOLS"
-        binding.statusText.text = "HARDWARE SENSORS ACTIVE"
-        binding.responseText.text = "Initializing Hardware Tools...\n\nClick PTT (now SOS) to toggle Lighthouse Signaling."
-        binding.btnHome.visibility = android.view.View.VISIBLE
-        binding.aiCard.setCardBackgroundColor(Color.parseColor("#44FF9800"))
-        
-        // Temporarily repurpose PTT button as SOS toggle in Tools mode
-        binding.pttButton.visibility = android.view.View.VISIBLE
-        binding.pttButton.text = "🆘"
-        binding.pttButton.setOnClickListener {
-            toggleSOS()
-        }
-        
-        survivalTools.startWeatherMonitoring()
-    }
+    
+    // Legacy method - can remove or repurpose? 
+    // Kept for minimizing diff but practically unused now as Tools has its own Dashboard
+    // private fun showToolsDashboardOld() { ... }
 
     private var sosActive = false
     private fun toggleSOS() {
@@ -252,8 +327,8 @@ class MainActivity : AppCompatActivity() {
         binding.pttButton.visibility = android.view.View.GONE
         
         currentMode = AppMode.GENERAL
-        binding.titleText.text = "NOVA LITE"
-        binding.responseText.text = "Survival Database Ready."
+        updateLanguageUI()
+        
         binding.aiCard.setCardBackgroundColor(Color.parseColor("#22FFFFFF"))
         binding.btnHome.visibility = android.view.View.GONE
         if (binding.compassOverlay.visibility == android.view.View.VISIBLE) {
@@ -264,7 +339,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchToMode(mode: AppMode) {
         currentMode = mode
-        binding.titleText.text = "${mode.name} MODE"
+        updateLanguageUI()
+        // binding.titleText.text = "${mode.name} MODE" (Handled in updateLanguageUI)
         
         binding.responseText.text = ""
         binding.statusText.text = "DIRECT VAULT ACCESS"
