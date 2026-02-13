@@ -53,29 +53,39 @@ class NovaProductionEngine(
         return try {
             val analyzer = QueryAnalyzer()
             val intent = analyzer.analyze(userInput)
-            Log.d("NovaEngine", "Lite Intent Detected: $intent")
+            Log.d("NovaEngine", "Lite Intent: $intent | Input: $userInput")
 
-            // 1. Check Expert System (Rules First)
-            if (intent == QueryIntent.EMERGENCY || (intent == QueryIntent.MEDICAL && userInput.contains("fever|burn|bleed".toRegex()))) {
+            // 1. ALWAYS SEARCH THE VAULT FIRST (User requested behavior)
+            // We search for broad matches to ensure "every request goes to the database"
+            val searchResults = currentDomain?.search(userInput, limit = 1) ?: emptyList()
+            
+            if (searchResults.isNotEmpty()) {
+                // Determine header based on intent roughly
+                val header = when(intent) {
+                    QueryIntent.MEDICAL -> "🚑 [MEDICAL DATABASE]"
+                    QueryIntent.FARMING -> "🌾 [AGRI-VAULT]"
+                    QueryIntent.MECHANICAL -> "⚙️ [MECHANICAL DB]"
+                    else -> "🛡️ [SILICON VAULT]"
+                }
+                return "$header\n\n${searchResults[0]}"
+            }
+
+            // 2. Navigation Handling (If no direct DB match)
+            if (intent == QueryIntent.NAVIGATION) {
+                return handleSurvivalNav(userInput)
+            }
+
+            // 3. Fallback to Expert System (Only if DB failed)
+            if (intent == QueryIntent.EMERGENCY || (intent == QueryIntent.MEDICAL)) {
                 val ruleResult = ExpertSystem.getDecision(intent, userInput)
                 if (!ruleResult.contains("fallback", true)) {
                     return "🧠 [EXPERT SYSTEM]\n\n$ruleResult"
                 }
             }
 
-            // 2. Navigation Handling
-            if (intent == QueryIntent.NAVIGATION) {
-                return handleSurvivalNav(userInput)
-            }
+            // 4. Last Resort
+            HardcodedSurvival.getEmergencyTip(userInput)
 
-            // 3. Smart Vault Search
-            val searchResults = currentDomain?.search(userInput, limit = 1) ?: emptyList()
-            
-            if (searchResults.isNotEmpty()) {
-                "🛡️ [SILICON VAULT DATA]\n\n${searchResults[0]}"
-            } else {
-                HardcodedSurvival.getEmergencyTip(userInput)
-            }
         } catch (e: Exception) {
             Log.e("NovaEngine", "Lite Pipeline error", e)
             HardcodedSurvival.getEmergencyTip(userInput)

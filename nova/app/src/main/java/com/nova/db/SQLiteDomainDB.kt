@@ -131,8 +131,8 @@ class SQLiteDomainDB(
             SELECT s.name, s.navigation_use, s.description, v.position_guide
             FROM stars s
             LEFT JOIN star_visibility v ON s.id = v.star_id
-            WHERE s.name LIKE ? OR s.common_name LIKE ? OR s.constellation LIKE ? OR v.country LIKE ?
-        """, arrayOf("%$q%", "%$q%", "%$q%", "%$q%"))
+            WHERE s.name LIKE ? OR s.common_name LIKE ? OR s.constellation LIKE ? OR v.country LIKE ? OR s.description LIKE ?
+        """, arrayOf("%$q%", "%$q%", "%$q%", "%$q%", "%$q%"))
         
         starCursor.use {
             if (it.moveToFirst()) {
@@ -147,8 +147,8 @@ class SQLiteDomainDB(
             JOIN symptom_condition_map scm ON c.id = scm.condition_id
             JOIN symptoms s ON scm.symptom_id = s.id
             JOIN treatments t ON c.id = t.condition_id
-            WHERE s.name LIKE ? OR s.keywords LIKE ? OR c.name LIKE ?
-        """, arrayOf("%$q%", "%$q%", "%$q%"))
+            WHERE s.name LIKE ? OR s.keywords LIKE ? OR c.name LIKE ? OR t.description LIKE ?
+        """, arrayOf("%$q%", "%$q%", "%$q%", "%$q%"))
 
         medCursor.use {
             if (it.moveToFirst() && results.size < limit) {
@@ -157,14 +157,14 @@ class SQLiteDomainDB(
         }
 
         // 3. Search Water & Flora
-        val waterCursor = db.query("water_filtration", null, "method_name LIKE ?", arrayOf("%$q%"), null, null, null, "1")
+        val waterCursor = db.query("water_filtration", null, "method_name LIKE ? OR instructions LIKE ?", arrayOf("%$q%", "%$q%"), null, null, null, "1")
         waterCursor.use {
             if (it.moveToFirst() && results.size < limit) {
                 results.add("💧 [WATER: ${it.getString(1)}]\n\nSOURCE: ${it.getString(2)}\n\nSTEPS: ${it.getString(3)}")
             }
         }
 
-        val floraCursor = db.query("flora", null, "name LIKE ?", arrayOf("%$q%"), null, null, null, "1")
+        val floraCursor = db.query("flora", null, "name LIKE ? OR description LIKE ? OR use_case LIKE ?", arrayOf("%$q%", "%$q%", "%$q%"), null, null, null, "1")
         floraCursor.use {
             if (it.moveToFirst() && results.size < limit) {
                 results.add("🌿 [FLORA: ${it.getString(1)}]\n\nTYPE: ${it.getString(2)}\n\nDESC: ${it.getString(3)}\n\nUSE: ${it.getString(4)}")
@@ -173,17 +173,27 @@ class SQLiteDomainDB(
 
         // 4. Fallback to First Aid
         if (results.isEmpty()) {
-            val faCursor = db.query("first_aid", arrayOf("injury_type", "step_by_step"), "injury_type LIKE ? OR keywords LIKE ?", arrayOf("%$q%", "%$q%"), null, null, null, "1")
+            val faCursor = db.query("first_aid", arrayOf("injury_type", "step_by_step"), "injury_type LIKE ? OR keywords LIKE ? OR immediate_action LIKE ?", arrayOf("%$q%", "%$q%", "%$q%"), null, null, null, "1")
             faCursor.use {
                 if (it.moveToFirst()) {
                     results.add("🩹 [FIRST AID: ${it.getString(0)}]\n\n${it.getString(1)}")
                 }
             }
         }
-
-        // 4. Legacy Fallback
+        
+        // 5. Broad Search in Survival Tips (Wiki)
         if (results.isEmpty()) {
-            val legacyCursor = db.query("knowledge", arrayOf("answer"), "keywords LIKE ?", arrayOf("%$q%"), null, null, "priority ASC", "1")
+            val tipCursor = db.query("survival_tips", arrayOf("category", "tip"), "tip LIKE ? OR category LIKE ?", arrayOf("%$q%", "%$q%"), null, null, null, "1")
+            tipCursor.use {
+                if (it.moveToFirst()) {
+                    results.add("📖 [SURVIVAL WIKI: ${it.getString(0)}]\n${it.getString(1)}")
+                }
+            }
+        }
+
+        // 6. Legacy Fallback
+        if (results.isEmpty()) {
+            val legacyCursor = db.query("knowledge", arrayOf("answer"), "keywords LIKE ? OR question LIKE ? OR answer LIKE ?", arrayOf("%$q%", "%$q%", "%$q%"), null, null, "priority ASC", "1")
             legacyCursor.use {
                 if (it.moveToFirst()) {
                     results.add(it.getString(0))
