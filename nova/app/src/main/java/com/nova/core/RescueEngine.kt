@@ -43,6 +43,42 @@ object RescueEngine {
         return (nearest ?: GLOBAL_RESCUE_POINTS[0]) to minDistance.toFloat()
     }
 
+    fun getCelestialGuidance(currentLat: Double, currentLon: Double, targetLat: Double, targetLon: Double): String {
+        val bearing = calculateBearing(currentLat, currentLon, targetLat, targetLon)
+        val star = if (currentLat >= 0) "North Star (Polaris)" else "Southern Cross"
+        
+        // Normalize bearing to star
+        // If North Star (0 deg): 0 is Straight, 90 is Right, 270 is Left
+        // If Southern Cross (180 deg): 180 is Straight, 270 is Right, 90 is Left
+        
+        val relativeBearing = if (currentLat >= 0) {
+            bearing // North is 0
+        } else {
+            (bearing + 180) % 360 // South is 180, normalize to 0
+        }
+        
+        val direction = when {
+            relativeBearing < 10 || relativeBearing > 350 -> "STRAIGHT"
+            relativeBearing in 10.0..170.0 -> "${String.format("%.0f", relativeBearing)}° RIGHT"
+            relativeBearing in 190.0..350.0 -> "${String.format("%.0f", 360 - relativeBearing)}° LEFT"
+            else -> "BEHIND YOU"
+        }
+        
+        return "Guidance: Face $star. Target is $direction."
+    }
+
+    private fun calculateBearing(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val phi1 = lat1 * Math.PI / 180
+        val phi2 = lat2 * Math.PI / 180
+        val deltaLambda = (lon2 - lon1) * Math.PI / 180
+
+        val y = sin(deltaLambda) * cos(phi2)
+        val x = cos(phi1) * sin(phi2) - sin(phi1) * cos(phi2) * cos(deltaLambda)
+        val brng = atan2(y, x) * 180 / Math.PI
+        
+        return (brng + 360) % 360
+    }
+
     private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val R = 6371e3 // Earth radius in meters
         val phi1 = lat1 * Math.PI / 180

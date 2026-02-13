@@ -21,11 +21,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/brandLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_launcher_nova"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         android:text="NOVA DASHBOARD"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -33,7 +43,7 @@
         android:letterSpacing="0.1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/brandLogo" />
 
     <!-- SCROLL CONTAINER -->
     <androidx.core.widget.NestedScrollView
@@ -441,6 +451,16 @@
             android:layout_marginBottom="32dp"
             android:backgroundTint="#990000FF"
             android:text="📡 SIGNAL WAKE-UP"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnEmMorse"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#FFCC0000"
+            android:text="🔦 SOS MORSE (OFF)"
             android:textSize="20sp"
             android:textStyle="bold" />
 

@@ -29,23 +29,25 @@ class SurvivalTools(private val context: Context) : SensorEventListener {
     // --- LIGHTHOUSE MODE (Morse SOS) ---
     private var lighthouseJob: Job? = null
 
-    fun startSOS() {
+    fun startSOS(onPulse: ((Boolean) -> Unit)? = null) {
         stopLighthouse()
         lighthouseJob = CoroutineScope(Dispatchers.Default).launch {
             while (isActive) {
                 // SOS: ... --- ...
-                pulseMorse("...---...")
+                pulseMorse("...---...", onPulse)
                 delay(3000) // Wait between cycles
             }
         }
     }
 
-    private suspend fun pulseMorse(pattern: String) {
+    private suspend fun pulseMorse(pattern: String, onPulse: ((Boolean) -> Unit)? = null) {
         for (char in pattern) {
             val duration = if (char == '.') 200L else 600L
+            onPulse?.invoke(true)
             setFlashlight(true)
             delay(duration)
             setFlashlight(false)
+            onPulse?.invoke(false)
             delay(200) // Gap between signals
         }
     }

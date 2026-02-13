@@ -160,6 +160,22 @@ object LanguageManager {
             AppLanguage.CHINESE to "Nova 提供指导，而不是专业的医疗建议。\n在紧急情况下，尽可能联系当地当局。",
             AppLanguage.HINDI to "नोवा मार्गदर्शन प्रदान करता है, पेशेवर चिकित्सा सलाह नहीं।\nआपात स्थिति में, जब संभव हो स्थानीय अधिकारियों से संपर्क करें।",
             AppLanguage.FRENCH to "Nova fournit des conseils et non des avis médicaux professionnels.\nEn cas d'urgence, contactez les autorités locales si possible."
+        ),
+        "sos_morse_start" to mapOf(
+            AppLanguage.ENGLISH to "🔦 SOS MORSE (OFF)",
+            AppLanguage.ARABIC to "🔦 استغاثة مورس (إيقاف)",
+            AppLanguage.SPANISH to "🔦 SOS MORSE (APAGADO)",
+            AppLanguage.CHINESE to "🔦 SOS 摩斯密码 (关闭)",
+            AppLanguage.HINDI to "🔦 एसओएस मोर्स (बंद)",
+            AppLanguage.FRENCH to "🔦 SOS MORSE (ÉTEINT)"
+        ),
+        "sos_morse_stop" to mapOf(
+            AppLanguage.ENGLISH to "🛑 STOP SOS MORSE",
+            AppLanguage.ARABIC to "🛑 إيقاف استغاثة مورس",
+            AppLanguage.SPANISH to "🛑 DETENER SOS MORSE",
+            AppLanguage.CHINESE to "🛑 停止 SOS 摩斯密码",
+            AppLanguage.HINDI to "🛑 एसओएस मोर्स रोकें",
+            AppLanguage.FRENCH to "🛑 ARRÊTER SOS MORSE"
         )
         // Add more keys as needed for UI elements
     )

@@ -103,6 +103,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private var isMorseActive = false
+
     private fun setupListeners() {
         // Dashboard Categories
         binding.cardFarming.setOnClickListener { 
@@ -161,6 +163,21 @@ class MainActivity : AppCompatActivity() {
         binding.btnEmUnconscious.setOnClickListener { startDecisionFlow("cpr") }
         binding.btnEmHeat.setOnClickListener { startDecisionFlow("heat_stroke") }
         binding.btnEmLost.setOnClickListener { startDecisionFlow("lost") }
+        binding.btnEmMorse.setOnClickListener {
+            isMorseActive = !isMorseActive
+            if (isMorseActive) {
+                survivalTools.startSOS { active ->
+                    survivalActions.playEmergencyBeep(active)
+                }
+                binding.btnEmMorse.text = LanguageManager.get("sos_morse_stop")
+                binding.btnEmMorse.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.RED)
+            } else {
+                survivalTools.stopLighthouse()
+                survivalActions.playEmergencyBeep(false)
+                binding.btnEmMorse.text = LanguageManager.get("sos_morse_start")
+                binding.btnEmMorse.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#FFCC0000"))
+            }
+        }
         binding.btnEmSentinel.setOnClickListener { 
             val intent = android.content.Intent(this, com.nova.core.SignalMonitorService::class.java)
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -259,6 +276,9 @@ class MainActivity : AppCompatActivity() {
         
         binding.editManualInput.hint = LanguageManager.get("status_searching") // Reusing searching for hint
         binding.btnHome.text = "🔙 " + LanguageManager.get("welcome")
+        
+        // SOS Morse
+        binding.btnEmMorse.text = if (isMorseActive) LanguageManager.get("sos_morse_stop") else LanguageManager.get("sos_morse_start")
 
         // Update mode text if active
         if (currentMode != AppMode.GENERAL) {

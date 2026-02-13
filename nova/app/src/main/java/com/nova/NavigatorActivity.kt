@@ -83,7 +83,9 @@ class NavigatorActivity : AppCompatActivity() {
         
         // Anti-Gravity Rescue Logic
         val (rescuePoint, distanceKm) = com.nova.core.RescueEngine.findNearestCivilization(lat, lon)
-        binding.currentZoneText.text = "📍 $zone\n🚑 NEAREST RESCUE: ${rescuePoint.name} (${String.format("%.1f", distanceKm)} km)"
+        val celestialGuidance = com.nova.core.RescueEngine.getCelestialGuidance(lat, lon, rescuePoint.lat, rescuePoint.lon)
+        
+        binding.currentZoneText.text = "📍 $zone\n🚑 NEAREST RESCUE: ${rescuePoint.name} (${String.format("%.1f", distanceKm)} km)\n✨ $celestialGuidance"
 
         val point = GeoPoint(lat, lon)
         binding.mapView.controller.setCenter(point)

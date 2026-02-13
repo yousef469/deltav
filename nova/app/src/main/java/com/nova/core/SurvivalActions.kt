@@ -42,6 +42,14 @@ class SurvivalActions(private val context: Context) {
         toneGenerator.stopTone()
     }
 
+    fun playEmergencyBeep(on: Boolean) {
+        if (on) {
+            toneGenerator.startTone(ToneGenerator.TONE_CDMA_EMERGENCY_RINGBACK, 5000)
+        } else {
+            toneGenerator.stopTone()
+        }
+    }
+
     // --- DIRECTION LOCK ---
     private var lockedAzimuth: Float? = null
 
