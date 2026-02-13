@@ -59,7 +59,7 @@ export function Hero({ onStart }: HeroProps) {
                     <Button size="lg" className="group" onClick={onStart}>
                         Start Your Experience <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
-                    <a href="https://github.com/yousef469/deltav/raw/main/nova-v1.9-hydro.apk" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/yousef469/deltav/raw/main/nova-v1.9.2-hydro.apk" target="_blank" rel="noopener noreferrer">
                         <Button variant="secondary" size="lg" className="group border-brand-accent/30 hover:border-brand-accent/60 transition-colors">
                             <span className="flex items-center gap-2">
                                 Download Nova v1.9 (Hydro-Legacy)
