@@ -37,7 +37,11 @@
                   android:exported="true" />
         
         <service android:name=".core.GuardianService" android:exported="false" />
-        <service android:name=".core.SignalMonitorService" android:exported="false" />
+        <service android:name=".core.SignalMonitorService" android:foregroundServiceType="specialUse" android:exported="false" />
+        
+        <activity android:name=".core.EducationActivity" android:screenOrientation="portrait" />
+        <activity android:name=".core.CodingActivity" android:screenOrientation="portrait" />
+        <activity android:name=".core.ChessActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

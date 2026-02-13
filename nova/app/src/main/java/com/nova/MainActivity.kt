@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         checkPermissions()
         setupTools()
         updateLanguageUI()
+        activateBatterySaver()
     }
 
     private fun checkPermissions() {
@@ -108,8 +109,8 @@ class MainActivity : AppCompatActivity() {
         binding.cardFarming.setOnClickListener { switchToMode(AppMode.FARMING) }
         binding.cardNav.setOnClickListener { switchToMode(AppMode.ASTRONOMY) }
         
-        // SOS Button -> Emergency Dashboard
-        binding.cardSOS.setOnClickListener { 
+        // NEW: Top Emergency Card
+        binding.cardEmergencyTop.setOnClickListener { 
             showEmergencyDashboard()
         }
 
@@ -122,6 +123,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.cardTools.setOnClickListener {
             showToolsDashboard()
+        }
+        
+        // NEW SECTIONS
+        binding.cardEducation.setOnClickListener {
+           startActivity(android.content.Intent(this, com.nova.core.EducationActivity::class.java))
+        }
+        
+        binding.cardCoding.setOnClickListener {
+           startActivity(android.content.Intent(this, com.nova.core.CodingActivity::class.java))
+        }
+        
+        binding.cardGame.setOnClickListener {
+           startActivity(android.content.Intent(this, com.nova.core.ChessActivity::class.java))
         }
 
         binding.btnHome.setOnClickListener { exitMode() }
@@ -190,7 +204,6 @@ class MainActivity : AppCompatActivity() {
         binding.btnToolWater.setOnClickListener {
             val active = survivalActions.toggleWaterTimer(15) { alert ->
                 android.widget.Toast.makeText(this, alert, android.widget.Toast.LENGTH_LONG).show()
-                // Optionally push a local notification or sound
             }
             binding.btnToolWater.text = if (active) "💧 TIMER ACTIVE (15m)" else "💧 WATER TIMER (OFF)"
             binding.btnToolWater.backgroundTintList = android.content.res.ColorStateList.valueOf(if (active) Color.BLUE else Color.parseColor("#2196f3"))
@@ -199,6 +212,14 @@ class MainActivity : AppCompatActivity() {
         binding.btnToolBack.setOnClickListener { closeToolsDashboard() }
 
         binding.pttButton.setOnTouchListener(null)
+    }
+    
+    // BATTERY SAVER OPTIMIZATION
+    private fun activateBatterySaver() {
+        // Dark Mode is already inherent in the UI (Black backgrounds)
+        // We can disable heavy animations or background tasks if not needed
+        // For now, we ensure the screen doesn't stay on unnecessarily unless in a mode
+        window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun showEmergencyDashboard() {
