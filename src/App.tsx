@@ -4,6 +4,7 @@ import { Footer } from "./components/layout/Footer"
 import { Hero } from "./sections/Hero"
 import { Services } from "./sections/Services"
 import { Portfolio } from "./sections/Portfolio"
+import { Skills } from "./sections/Skills"
 import { About } from "./sections/About"
 import { Contact } from "./sections/Contact"
 import { WorkingStation } from "./pages/WorkingStation"
@@ -23,6 +24,7 @@ function App() {
         <Hero onStart={() => setShowWorkingStation(true)} />
         <Services />
         <Portfolio />
+        <Skills />
         <About />
         <Contact onStart={() => setShowWorkingStation(true)} />
       </main>
