@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
-import { X, ExternalLink, Play, Info, BookOpen, PenTool, Code, Cpu, Calculator } from "lucide-react"
+import { X, ExternalLink, Play, Info, Code, Cpu, Calculator } from "lucide-react"
 
 interface PortfolioItem {
     id: string
