@@ -3,6 +3,7 @@ import { Navbar } from "./components/layout/Navbar"
 import { Footer } from "./components/layout/Footer"
 import { Hero } from "./sections/Hero"
 import { Services } from "./sections/Services"
+import { Portfolio } from "./sections/Portfolio"
 import { About } from "./sections/About"
 import { Contact } from "./sections/Contact"
 import { WorkingStation } from "./pages/WorkingStation"
@@ -21,6 +22,7 @@ function App() {
       <main>
         <Hero onStart={() => setShowWorkingStation(true)} />
         <Services />
+        <Portfolio />
         <About />
         <Contact onStart={() => setShowWorkingStation(true)} />
       </main>

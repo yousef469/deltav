@@ -5,9 +5,8 @@ import { Button } from "../ui/Button"
 import { Logo } from "../ui/Logo"
 
 const navLinks = [
-    { name: "Services", href: "#services" },
+    { name: "Portfolio", href: "#work" },
     { name: "Philosophy", href: "#philosophy" },
-    { name: "Work", href: "#work" },
     { name: "Nova (APK)", href: "https://github.com/yousef469/deltav/releases/download/v20.0/app-debug.apk" },
 ]
 
