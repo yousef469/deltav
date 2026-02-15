@@ -34,7 +34,7 @@ const portfolioData: PortfolioItem[] = [
         name: "Engineerium",
         shortDesc: "Interactive STEM Education Platform with 3D Models & AI",
         longDesc: "Engineerium is a comprehensive STEM education platform that combines 5 engineering disciplines with 100+ lessons, AI-powered tutoring (EnGo), and interactive 3D models with JARVIS explode mode.",
-        image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000",
+        image: "/assets/engineerium/project-overview.jpg",
         link: "https://engineeruim-p8ti.vercel.app/",
         githubLink: "https://github.com/yousef469/Engineeruim",
         readme: `# 🚀 Engineerium - The Ultimate Interactive STEM Education Platform
@@ -139,7 +139,19 @@ npm run dev
 
 ---
 
-**Built with ❤️ for engineering education**`
+**Built with ❤️ for engineering education**`,
+        assets: [
+            {
+                type: 'video',
+                url: '/assets/engineerium/video.mp4',
+                label: 'Platform Demo Walkthrough'
+            },
+            {
+                type: 'file',
+                url: '/assets/engineerium/certificate.pdf',
+                label: 'MATLAB Certification'
+            }
+        ]
     },
     {
         id: "p-big-medication-system",
@@ -292,6 +304,41 @@ To ensure seamless connectivity across Web and Android:
         image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=2000",
         link: "#"
     })),
+
+    // --- PROGRAMMING: HANDWRITTEN CODE ---
+    {
+        id: "p-handwritten-snake",
+        category: 'programming',
+        subcategory: 'handwritten',
+        name: "Snake Game",
+        shortDesc: "Classic Snake Game Built from Scratch",
+        longDesc: "A classic Snake game implementation built entirely from scratch using vanilla JavaScript and HTML5 Canvas. Features smooth animations, score tracking, and increasing difficulty.",
+        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2000",
+        link: "#",
+        githubLink: "https://github.com/yousef469"
+    },
+    {
+        id: "p-handwritten-mario",
+        category: 'programming',
+        subcategory: 'handwritten',
+        name: "Mario Game",
+        shortDesc: "Super Mario-Style Platformer",
+        longDesc: "A Super Mario-inspired platformer game with custom physics engine, collision detection, and level design. Built with JavaScript and Canvas API.",
+        image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=2000",
+        link: "#",
+        githubLink: "https://github.com/yousef469"
+    },
+    {
+        id: "p-handwritten-geometry-dash",
+        category: 'programming',
+        subcategory: 'handwritten',
+        name: "Geometry Dash",
+        shortDesc: "Rhythm-Based Platformer Clone",
+        longDesc: "A Geometry Dash-inspired rhythm platformer with procedural level generation, obstacle patterns, and synchronized music. Features custom physics and collision systems.",
+        image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=2000",
+        link: "#",
+        githubLink: "https://github.com/yousef469"
+    },
 
     // --- MECHANICAL (10) ---
     ...Array.from({ length: 10 }).map((_, i) => ({

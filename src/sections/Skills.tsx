@@ -20,7 +20,9 @@ const skillCategories: SkillCategory[] = [
         skills: [
             { name: "React / TypeScript", level: 95, icon: <Layers className="w-4 h-4" /> },
             { name: "Node.js / Backend", level: 85, icon: <Terminal className="w-4 h-4" /> },
-            { name: "Python / AI", level: 90, icon: <Database className="w-4 h-4" /> },
+            { name: "Python Intermediate", level: 70, icon: <Database className="w-4 h-4" /> },
+            { name: "Matlab Beginner", level: 50, icon: <Calculator className="w-4 h-4" /> },
+            { name: "Shopify Integrations", level: 75, icon: <Code className="w-4 h-4" /> },
             { name: "Handwritten Logic", level: 100, icon: <PenTool className="w-4 h-4" /> }
         ]
     },
