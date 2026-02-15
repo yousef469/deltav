@@ -1,0 +1,60 @@
+What is the name of the clinical coordination platform developed by MediHealth Global?,MedicationSystem.
+Which two primary technologies does MedicationSystem use to bridge the gap between patient reporting and clinical action?,Gemini AI and 3D Bio-Anatomy.
+Which five user roles are designed to be unified within the MedicationSystem workflow?,"Patients, Coordinators, Nurses, Doctors, and Hospital Administrators."
+"In addition to tracking medical journeys, what specific visual diagnostic tool can patients access via the Android App?",3D diagnostics.
+What is the primary function of the secure Pharmacy Wallet in the Android App?,To facilitate QR-based medication pickup.
+What three formats are supported for submitting user requests through the Android App?,"Text, Voice, and PDF."
+What is the first step required to test the Hospital Creation and Staff Onboarding flow?,Registering a new Hospital Node.
+How does a Hospital Administrator link staff members to the hospital's private ecosystem?,By generating and sending invite links from the Admin dashboard.
+Which clinical staff roles are typically invited to the MedicationSystem via the Hospital Admin dashboard?,"Coordinators (Secretaries), Nurses, and Doctors."
+What is the first stage of the 'Clinical Journey' after a user selects a hospital?,Submitting a User Request.
+Which staff member is the first to receive and triage a user request?,The Coordinator.
+What AI-generated metric does the Coordinator review before assigning clinical staff?,The AI urgency score.
+Which two roles are assigned to a case by the Coordinator during the triage phase?,A Nurse and a Doctor.
+What two types of clinical data must the Nurse register during the Intake phase?,Vitals and Triage Notes.
+To whom does the Nurse pass the case after completing the Intake phase?,The assigned Doctor.
+What clinical document does the Doctor review at the start of a consultation?,The clinical synthesis.
+What technical requirement must be met in the .env file to enable 3D AI Analysis?,A Gemini API Key must be present.
+Under what condition will the system perform a deep analysis during a Doctor's consultation?,If a PDF report or text was provided and a Gemini API Key is configured.
+"In the 3D Bio-Anatomy visualisation, what does the colour red indicate?",Damaged tissue or bone identified by the AI.
+Where does a patient receive their prescription QR code after a consultation?,In their digital Pharmacy Wallet.
+What three pieces of information are visible to a pharmacist upon scanning a patient's QR code?,"Hospital Name, Doctor Name, and the exact medication."
+Which piece of information is explicitly kept private from the pharmacist during the dispensing process?,The patient's diagnosis.
+Which specific AI models are utilised to convert medical jargon into 3D mesh coordinates?,Gemini 1.5 Flash and Gemini 1.5 Pro.
+What type of coordinates does Gemini AI generate for anatomical mapping?,3D mesh coordinates.
+"In the system's mapping logic, what is the 3D mesh coordinate for an ACL injury?",LegL: ACL.
+What is the coordinate mapping used by the system for the fourth lumbar vertebra?,Vertebrae: L4.
+What must be running in the terminal to maintain a real-time link between the Android App and the staff portal?,The Backend Tunnel.
+Which two technologies are used for the MedicationSystem frontend?,React and Vite.
+What hosting platform is used for the MedicationSystem's frontend?,Vercel.
+Which programming language and framework power the backend logic of the system?,Python and FastAPI.
+Which platform provides both the PostgreSQL database and Row Level Security (RLS)?,Supabase.
+How are real-time communications and updates managed across the platform?,Via Supabase real-time subscriptions.
+What is the development status of the MedicationSystem as of January 2025?,v0.1 - Active Development (UX Refinement in Progress).
+Which user role is responsible for reviewing AI urgency scores?,The Coordinator.
+What visual representation is used for anatomical mapping during diagnostics?,A 3D Humanoid.
+What is the purpose of the 3D Bio-Anatomy for clinical staff?,Precision in identifying pathology.
+How does the 3D Bio-Anatomy benefit the patient?,It helps them understand their diagnosis through visual diagnostics.
+Which role in the system is equivalent to a Secretary?,The Coordinator.
+What is the specific focus of the ongoing v0.1 development work?,UX Refinement for enhanced clinical efficiency.
+Which file type can be attached to a user request to provide a medical report?,PDF.
+Concept: Row Level Security (RLS),Definition: A database security feature in Supabase used to restrict which rows users can access.
+"In the Clinical Journey example, which specific injury is used to demonstrate the system flow?",An ACL injury.
+What is the name of the ecosystem's overarching company?,MediHealth Global.
+Which part of the tech stack handles the AI-powered deep analysis?,The Python Backend (FastAPI) integrated with Gemini AI.
+What action does a staff member take to join a hospital's private ecosystem after receiving an invite?,They register via the provided invite link.
+What component allows pharmacists to verify a prescription without seeing the diagnosis?,The digital QR code in the user's wallet.
+Process: Staff Onboarding,Step 1: Create Hospital Node; Step 2: Generate invite links for staff; Step 3: Staff register via links.
+Process: Clinical Journey (First three steps),1. User Request; 2. Coordinator Triage; 3. Nurse Intake.
+What is the intended outcome of unifyng workflows for all five user roles?,Seamless clinical coordination.
+Which AI feature converts medical jargon into visual pathology on a 3D model?,Gemini-Powered 3D Anatomy.
+True or False: The pharmacist can see the name of the doctor who prescribed the medication.,True.
+True or False: A user can track their medical journey through the portal or the Android App.,True.
+What is the purpose of the AI urgency score during triage?,To help the Coordinator prioritise and assign clinical cases.
+Where are the hospital node registration and staff invite links managed?,The Hospital Admin dashboard.
+The _____ is used by Gemini to highlight specific pathology such as 'LegL: ACL'.,3D Humanoid
+Why is the Backend Tunnel considered critical for the Android App?,It provides the real-time connectivity between the app and the hospital staff logic.
+Which clinical role is specifically responsible for registering 'Vitals'?,The Nurse.
+What is the date of the MedicationSystem build described in the documentation?,January 2025.
+What specific part of the tech stack is used to host the frontend via Vercel?,React + Vite.
+What is the name of the database technology used within the Supabase platform?,PostgreSQL.

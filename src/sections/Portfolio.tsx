@@ -1,8 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
-import { X, ExternalLink, Play, Info, Code, Cpu, Calculator, Github } from "lucide-react"
+import { X, ExternalLink, Info, Code, Cpu, Calculator, Github, FileText, Image as ImageIcon, Video } from "lucide-react"
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+
+interface PortfolioAsset {
+    type: 'video' | 'image' | 'file';
+    url: string;
+    label: string;
+    thumbnail?: string;
+}
 
 interface PortfolioItem {
     id: string
@@ -13,6 +20,7 @@ interface PortfolioItem {
     link: string
     githubLink?: string
     readme?: string
+    assets?: PortfolioAsset[]
     category: 'programming' | 'mechanical' | 'calculus'
     subcategory?: 'big' | 'handwritten'
 }
@@ -143,6 +151,23 @@ npm run dev
         image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000",
         link: "https://medication-system.vercel.app/",
         githubLink: "https://github.com/yousef469/medication-system",
+        assets: [
+            {
+                type: 'video',
+                url: '/assets/medication/video.mp4',
+                label: 'System Demo Walkthrough'
+            },
+            {
+                type: 'image',
+                url: '/assets/medication/project-overview.jpg',
+                label: 'Project Architecture Diagram'
+            },
+            {
+                type: 'file',
+                url: '/assets/medication/flashcards.csv',
+                label: 'Medical Flashcards Dataset'
+            }
+        ],
         readme: `# MedicationSystem (MediHealth Global)
 
 **Built: January 2025**  
@@ -445,48 +470,68 @@ export function Portfolio() {
                                         </a>
                                     )}
                                 </div>
-                            </div>
 
-                            <div className="w-full md:w-3/5 p-8 md:p-12 bg-black/40 overflow-y-auto no-scrollbar">
-                                {selectedItem.readme ? (
-                                    <div className="prose prose-invert prose-brand max-w-none 
-                                        prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tighter prose-headings:uppercase
-                                        prose-h1:text-4xl prose-h2:text-2xl prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2 prose-h2:mt-12
-                                        prose-p:text-white/60 prose-p:leading-relaxed
-                                        prose-strong:text-brand-accent prose-strong:font-bold
-                                        prose-a:text-brand-accent prose-a:no-underline hover:prose-a:underline
-                                        prose-code:text-brand-accent prose-code:bg-white/5 prose-code:px-1 prose-code:rounded
-                                        prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10
-                                        prose-li:text-white/60
-                                        prose-img:rounded-xl prose-img:border prose-img:border-white/10
-                                        prose-table:border-collapse prose-table:w-full
-                                        prose-th:text-brand-accent prose-th:border prose-th:border-white/10 prose-th:p-2 prose-th:bg-white/5
-                                        prose-td:text-white/60 prose-td:border prose-td:border-white/10 prose-td:p-2
-                                    ">
-                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                                            {selectedItem.readme}
-                                        </ReactMarkdown>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-10">
-                                        {Array.from({ length: 2 }).map((_, i) => (
-                                            <div key={i}>
-                                                <div className="flex items-center gap-3 text-white/30 mb-4">
-                                                    <Play className="w-4 h-4" />
-                                                    <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Module Stream {i + 1}</span>
+                                {selectedItem.assets && selectedItem.assets.length > 0 && (
+                                    <div className="pt-8 border-t border-white/5">
+                                        <h4 className="text-sm font-bold text-white/40 uppercase tracking-widest mb-6">Project Assets</h4>
+                                        <div className="space-y-4">
+                                            {selectedItem.assets.map((asset, idx) => (
+                                                <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded hover:bg-white/10 transition-colors">
+                                                    {asset.type === 'video' && (
+                                                        <div className="space-y-2">
+                                                            <div className="flex items-center gap-2 text-brand-accent text-xs uppercase tracking-wider mb-2">
+                                                                <Video className="w-3 h-3" /> Video Demo
+                                                            </div>
+                                                            <video controls className="w-full rounded border border-white/10 max-h-48 object-cover">
+                                                                <source src={asset.url} type="video/mp4" />
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                            <p className="text-xs text-white/50">{asset.label}</p>
+                                                        </div>
+                                                    )}
+                                                    {asset.type === 'image' && (
+                                                        <div className="space-y-2">
+                                                            <div className="flex items-center gap-2 text-brand-accent text-xs uppercase tracking-wider mb-2">
+                                                                <ImageIcon className="w-3 h-3" /> Image Asset
+                                                            </div>
+                                                            <img src={asset.url} alt={asset.label} className="w-full rounded border border-white/10" />
+                                                            <p className="text-xs text-white/50">{asset.label}</p>
+                                                        </div>
+                                                    )}
+                                                    {asset.type === 'file' && (
+                                                        <a href={asset.url} download className="flex items-center justify-between group">
+                                                            <div className="flex items-center gap-3">
+                                                                <div className="p-2 bg-brand-accent/10 rounded group-hover:bg-brand-accent/20 transition-colors">
+                                                                    <FileText className="w-5 h-5 text-brand-accent" />
+                                                                </div>
+                                                                <div>
+                                                                    <p className="text-xs text-white/40">Click to download</p>
+                                                                </div>
+                                                            </div>
+                                                            <ExternalLink className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
+                                                        </a>
+
+                                                    )}
                                                 </div>
-                                                <div className="aspect-video bg-white/5 border border-white/5 flex flex-col items-center justify-center group hover:bg-white/10 transition-all duration-500 relative overflow-hidden">
-                                                    <div className="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                                                    <div className="text-white/10 group-hover:text-brand-accent transition-colors flex flex-col items-center relative z-10">
-                                                        <Play className="w-10 h-10 mb-3" />
-                                                        <p className="text-[10px] tracking-[0.4em] font-medium">AWAITING VIDEO DATA</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                             </div>
+
+                            <div className="w-full md:w-3/5 bg-black/20 p-8 md:p-12 overflow-y-auto border-l border-white/5 custom-scrollbar">
+                                <img
+                                    src={selectedItem.image}
+                                    alt={selectedItem.name}
+                                    className="w-full h-auto rounded-lg shadow-2xl mb-8 border border-white/10 object-cover aspect-video"
+                                />
+                                {selectedItem.readme && (
+                                    <div className="prose prose-invert max-w-none prose-pre:bg-black/50 prose-pre:border prose-pre:border-white/10">
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{selectedItem.readme}</ReactMarkdown>
+                                    </div>
+                                )}
+                            </div>
+
                         </motion.div>
                     </div>
                 )}
@@ -494,4 +539,5 @@ export function Portfolio() {
         </section>
     )
 }
+
 
