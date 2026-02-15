@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
-import { X, ExternalLink, Play, Info, Code, Cpu, Calculator } from "lucide-react"
+import { X, ExternalLink, Play, Info, Code, Cpu, Calculator, Github } from "lucide-react"
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface PortfolioItem {
     id: string
@@ -9,12 +11,128 @@ interface PortfolioItem {
     longDesc: string
     image: string
     link: string
+    githubLink?: string
+    readme?: string
     category: 'programming' | 'mechanical' | 'calculus'
     subcategory?: 'big' | 'handwritten'
 }
 
 const portfolioData: PortfolioItem[] = [
-    // --- PROGRAMMING: BIG PROJECTS (10) ---
+    // --- PROGRAMMING: BIG PROJECTS ---
+    {
+        id: "p-big-engineerium",
+        category: 'programming',
+        subcategory: 'big',
+        name: "Engineerium",
+        shortDesc: "Interactive STEM Education Platform with 3D Models & AI",
+        longDesc: "Engineerium is a comprehensive STEM education platform that combines 5 engineering disciplines with 100+ lessons, AI-powered tutoring (EnGo), and interactive 3D models with JARVIS explode mode.",
+        image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000",
+        link: "https://engineeruim-p8ti.vercel.app/",
+        githubLink: "https://github.com/yousef469/Engineeruim",
+        readme: `# 🚀 Engineerium - The Ultimate Interactive STEM Education Platform
+
+> Master engineering through interactive 3D models, AI-powered tutoring, gamified learning, and real-world projects
+
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://engineeruim-p8ti.vercel.app/)
+[![React](https://img.shields.io/badge/React-18.x-61DAFB)](https://reactjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E)](https://supabase.com/)
+[![Gemini AI](https://img.shields.io/badge/Gemini-AI%20Powered-4285F4)](https://ai.google.dev/)
+
+---
+
+## 🌟 Platform Overview
+
+Engineerium is a comprehensive STEM education platform that combines:
+- **5 Engineering Disciplines** with 100+ lessons
+- **AI-Powered Tutoring** (EnGo - powered by Google Gemini 2.0 Flash)
+- **Interactive 3D Models** with JARVIS explode mode
+- **Real-time Progress Tracking** with XP and leveling
+- **Community Features** for collaborative learning
+- **Career Projects** for portfolio building
+- **25+ Engineering Calculators** and 200+ formulas
+
+---
+
+## 🎯 Project Vision & Impact
+
+### The "Why": The Reason for Creation
+Engineerium was created to bridge the massive gap between **dense theoretical math/physics** and **real-world engineering**. Traditional textbooks are static; Engineerium was built to make engineering "alive," allowing students to interact with the same formulas (like the Tsiolkovsky Rocket Equation) used at NASA and SpaceX in a visual, low-risk environment.
+
+### 📈 Evolution and Improvements
+The project has evolved from a simple model viewer into a **comprehensive career-ready curriculum**:
+- **Foundation Depth**: Curriculum sections like \`Unit 0: Foundations\` include **MIT-quality content** covering Vectors, Newton’s Laws, and Thermodynamics.
+- **Technical Fidelity**: 3D models moved from simple shapes to **high-fidelity components** (like the Falcon 9 Octaweb and Merlin Engines) with dedicated "JARVIS" modes that analyze parts in real-time.
+- **AI Integration**: The tutoring system moved from simple chat to **EnGo Tutor**, which is context-aware—meaning it knows exactly which lesson you are on and can explain complex derivations step-by-step.
+
+### 🎓 How It Transforms Student Learning
+1.  **Visual Intuition**: Instead of just reading "Thrust = Force," students see the vectors acting on a 3D car or rocket. The **Explode View** lets them see the "guts" of an engine, building spatial awareness.
+2.  **Instant Feedback**: Every lesson contains a **5-question quiz** with immediate explanations. This "micro-learning" prevents knowledge gaps from forming.
+3.  **Variable Complexity**: It starts with "Beginner Units" (Foundations) and scales all the way to **Capstone Projects**, allowing a student to grow from a hobbyist to a career-ready engineer.
+
+---
+
+## ✨ Complete Feature List
+
+### 🎓 Learning System
+| Feature | Description |
+|---------|-------------|
+| **5 Learning Tracks** | Rockets, Planes, Cars, Electronics, Civil Engineering |
+| **100+ Lessons** | Comprehensive curriculum from basics to advanced |
+| **Game-Style Maps** | Visual progression with unlockable content |
+| **Interactive Quizzes** | End-of-lesson assessments with instant feedback |
+
+### 🤖 AI Features (EnGo Tutor)
+| Feature | Description |
+|---------|-------------|
+| **Floating AI Helper** | Accessible from any page |
+| **Context-Aware** | Knows current lesson and subject |
+| **Quick Actions** | Explain Concept, Help with Math, Draw Diagram, Real Examples |
+
+### 🎮 Gamification
+| Feature | Description |
+|---------|-------------|
+| **XP System** | Earn XP for completing lessons |
+| **Leveling** | 1000 XP = 1 Level |
+| **Achievements** | 20+ unlockable badges |
+| **Streak System** | Daily learning streaks with fire counter |
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18.x**
+- **Vite 5.x**
+- **Tailwind CSS 3.x**
+- **Three.js** (WebGL 3D)
+- **GSAP** (Animations)
+
+### Backend & Services
+- **Supabase** (Auth, Database, Storage)
+- **Google Gemini 2.0 Flash** (AI)
+- **Stripe** (Payments)
+- **Vercel** (Hosting)
+
+---
+
+## 🚀 Quick Start
+
+\`\`\`bash
+# Clone repository
+git clone https://github.com/yousef469/Engineeruim.git
+cd Engineeruim
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+\`\`\`
+
+---
+
+**Built with ❤️ for engineering education**`
+    },
     {
         id: "p-big-1",
         category: 'programming',
@@ -215,32 +333,67 @@ export function Portfolio() {
                                     {selectedItem.longDesc}
                                 </p>
 
-                                <a
-                                    href={selectedItem.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-3 px-8 py-4 bg-brand-accent text-brand-black font-bold hover:bg-white transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs"
-                                >
-                                    Launch Project <ExternalLink className="w-4 h-4" />
-                                </a>
+                                <div className="flex flex-wrap gap-4">
+                                    <a
+                                        href={selectedItem.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-3 px-8 py-4 bg-brand-accent text-brand-black font-bold hover:bg-white transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs"
+                                    >
+                                        Launch Project <ExternalLink className="w-4 h-4" />
+                                    </a>
+                                    {selectedItem.githubLink && (
+                                        <a
+                                            href={selectedItem.githubLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 text-white font-bold hover:bg-white/20 transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs border border-white/10"
+                                        >
+                                            GitHub Repo <Github className="w-4 h-4" />
+                                        </a>
+                                    )}
+                                </div>
                             </div>
 
-                            <div className="w-full md:w-3/5 p-8 md:p-12 space-y-10 bg-black/40">
-                                {Array.from({ length: 2 }).map((_, i) => (
-                                    <div key={i}>
-                                        <div className="flex items-center gap-3 text-white/30 mb-4">
-                                            <Play className="w-4 h-4" />
-                                            <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Module Stream {i + 1}</span>
-                                        </div>
-                                        <div className="aspect-video bg-white/5 border border-white/5 flex flex-col items-center justify-center group hover:bg-white/10 transition-all duration-500 relative overflow-hidden">
-                                            <div className="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                                            <div className="text-white/10 group-hover:text-brand-accent transition-colors flex flex-col items-center relative z-10">
-                                                <Play className="w-10 h-10 mb-3" />
-                                                <p className="text-[10px] tracking-[0.4em] font-medium">AWAITING VIDEO DATA</p>
-                                            </div>
-                                        </div>
+                            <div className="w-full md:w-3/5 p-8 md:p-12 bg-black/40 overflow-y-auto no-scrollbar">
+                                {selectedItem.readme ? (
+                                    <div className="prose prose-invert prose-brand max-w-none 
+                                        prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tighter prose-headings:uppercase
+                                        prose-h1:text-4xl prose-h2:text-2xl prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2 prose-h2:mt-12
+                                        prose-p:text-white/60 prose-p:leading-relaxed
+                                        prose-strong:text-brand-accent prose-strong:font-bold
+                                        prose-a:text-brand-accent prose-a:no-underline hover:prose-a:underline
+                                        prose-code:text-brand-accent prose-code:bg-white/5 prose-code:px-1 prose-code:rounded
+                                        prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10
+                                        prose-li:text-white/60
+                                        prose-img:rounded-xl prose-img:border prose-img:border-white/10
+                                        prose-table:border-collapse prose-table:w-full
+                                        prose-th:text-brand-accent prose-th:border prose-th:border-white/10 prose-th:p-2 prose-th:bg-white/5
+                                        prose-td:text-white/60 prose-td:border prose-td:border-white/10 prose-td:p-2
+                                    ">
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                            {selectedItem.readme}
+                                        </ReactMarkdown>
                                     </div>
-                                ))}
+                                ) : (
+                                    <div className="space-y-10">
+                                        {Array.from({ length: 2 }).map((_, i) => (
+                                            <div key={i}>
+                                                <div className="flex items-center gap-3 text-white/30 mb-4">
+                                                    <Play className="w-4 h-4" />
+                                                    <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Module Stream {i + 1}</span>
+                                                </div>
+                                                <div className="aspect-video bg-white/5 border border-white/5 flex flex-col items-center justify-center group hover:bg-white/10 transition-all duration-500 relative overflow-hidden">
+                                                    <div className="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                                                    <div className="text-white/10 group-hover:text-brand-accent transition-colors flex flex-col items-center relative z-10">
+                                                        <Play className="w-10 h-10 mb-3" />
+                                                        <p className="text-[10px] tracking-[0.4em] font-medium">AWAITING VIDEO DATA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     </div>
@@ -249,3 +402,4 @@ export function Portfolio() {
         </section>
     )
 }
+
