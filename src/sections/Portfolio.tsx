@@ -145,13 +145,19 @@ npm run dev
                 type: 'video',
                 url: '/assets/engineerium/video.mp4',
                 label: 'Platform Demo Walkthrough'
-            },
-            {
-                type: 'file',
-                url: '/assets/engineerium/certificate.pdf',
-                label: 'MATLAB Certification'
             }
         ]
+    },
+    {
+        id: "p-big-walaatyeb",
+        category: 'programming',
+        subcategory: 'big',
+        name: "Wala Atyab Restaurant",
+        shortDesc: "Modern Lebanese Restaurant Website with Bilingual Support",
+        longDesc: "A sophisticated restaurant website for Wala Atyab, a Lebanese restaurant and lounge. Features an elegant dark theme with gold accents, interactive menu system with category filtering, bilingual support (English/Arabic), and responsive design for optimal viewing across all devices.",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=2000",
+        link: "https://walaatyeb.vercel.app/",
+        githubLink: "https://github.com/yousef469/walaatyeb"
     },
     {
         id: "p-big-medication-system",

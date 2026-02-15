@@ -7,6 +7,7 @@ import { Portfolio } from "./sections/Portfolio"
 import { Skills } from "./sections/Skills"
 import { About } from "./sections/About"
 import { Contact } from "./sections/Contact"
+import { Certifications } from "./sections/Certifications"
 import { WorkingStation } from "./pages/WorkingStation"
 import { VectorAI } from "./components/layout/VectorAI"
 
@@ -24,6 +25,7 @@ function App() {
         <Hero onStart={() => setShowWorkingStation(true)} />
         <Services />
         <Portfolio />
+        <Certifications />
         <Skills />
         <About />
         <Contact onStart={() => setShowWorkingStation(true)} />
