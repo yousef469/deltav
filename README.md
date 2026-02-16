@@ -1,74 +1,89 @@
-# React + TypeScript + Vite
+# ◈ ATLAS
+### Offline AI Assistant for Engineers, Researchers & Creators
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Atlas (formerly JARVIS) is a sophisticated, offline-first AI ecosystem designed to provide high-performance assistance without relying on external cloud services. It integrates real-time voice interaction, computer vision, 3D modeling, and automation into a unified cognitive architecture.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🏛️ Core Architecture
 
-## React Compiler
+Atlas is built on a distributed engine model that prioritizes low latency and local execution:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: A sleek, high-fidelity React application wrapped in Electron for native desktop capabilities (macOS/Windows).
+- **Backend**: A FastAPI-powered Python hub orchestrating state-of-the-art AI models.
+- **Communication**: Real-time bidirectional streaming via WebSocket.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🔄 The V24.5 Cognitive Loop
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The heart of Atlas is the **6-Step Cognitive Pipeline**, which ensures every action is grounded in context and memory:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1.  **Step 0: Memory Pre-fetch**: Loads relevant facts, preferences, and past lessons from ChromaDB before planning.
+2.  **Step 1: Planning**: A memory-informed routing step where the Brain (Qwen 2.5 Coder) selects the appropriate worker.
+3.  **Step 2: Execution**: The selected specialized worker performs the task (Web, Vision, Automation).
+4.  **Step 3: Review**: The Brain critiques the worker's output for quality and accuracy.
+5.  **Step 4: Update Memory**: Lessons learned and mistakes made are committed to long-term memory.
+6.  **Step 5: Synthesis**: A final, emotive response is generated for the user (Piper/Coqui TTS).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🛠️ Specialized Engines
+
+### 🧠 The Brain (Reasoning & Memory)
+Powered by **Qwen 2.5 Coder 7B** (via Ollama). Atlas features **Infinite Long-Term Memory** via ChromaDB—it remembers every fact, preference, and lesson learned across sessions, ensuring it grows more personalized over time.
+
+### 🎙️ Speech (Voice & Audio)
+- **STT**: `whisper.cpp` (CoreML optimized) for near-instant transcription.
+- **TTS**: `Piper` and `Coqui V3` for natural, emotive vocal feedback.
+- **Wake Word**: `openWakeWord` for local, low-power detection.
+
+### 👁️ Vision (OmniParser)
+Utilizes a custom Vision-Language Model pipeline (Qwen-VL) to understand the user's screen, identify UI elements, and perform OCR with spatial awareness.
+
+### 🖼️ Image Generation (ComfyUI & SDXL)
+Atlas integrates directly with **ComfyUI** and **SDXL** to generate high-fidelity images locally. It handles complex prompt engineering and model selection to produce professional-grade visual assets on demand.
+
+### 🏗️ 3D Generation
+A custom procedural modeling engine that converts natural language descriptions into valid 3D hierarchies and GLTF models.
+
+---
+
+## 📂 Project Structure
+
+```text
+atlas/
+├── src/                # React Frontend (TypeScript, Three.js)
+├── backend/            # Python FastAPI Server & Cognitive Logic
+│   ├── atlas_brain_v245.py    # Cognitive Pipeline
+│   ├── atlas_dispatcher.py    # Worker Orchestrator
+│   ├── server.py              # Main Entry Point
+│   └── workers/               # Specialized Task Workers
+├── workers/            # Multi-language code execution workers
+└── electron/           # Desktop App configuration
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# deltav
+1.  **Dependencies**:
+    - [Ollama](https://ollama.com/) (Download `qwen2.5-coder:7b`)
+    - Python 3.10+
+    - Node.js 18+
+2.  **Backend Setup**:
+    ```bash
+    cd atlas/backend
+    pip install -r requirements.txt
+    python server.py
+    ```
+3.  **Frontend Setup**:
+    ```bash
+    cd atlas
+    npm install
+    npm run dev
+    ```
+
+---
+
+*“Precision Engineering. Infinite Intelligence.”*
