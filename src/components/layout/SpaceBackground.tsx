@@ -21,6 +21,12 @@ export function SpaceBackground() {
                 loop
                 muted
                 playsInline
+                onEnded={() => {
+                    if (videoRef.current) {
+                        videoRef.current.currentTime = 0;
+                        videoRef.current.play();
+                    }
+                }}
                 className="absolute inset-0 w-screen h-screen object-cover pointer-events-none"
                 style={{
                     imageRendering: '-webkit-optimize-contrast',
