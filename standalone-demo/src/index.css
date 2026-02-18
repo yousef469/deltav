@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+@import './styles/variables.css';
+@import './styles/layout.css';
+@import './styles/sidebar.css';
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  --jarvis-cyan: #00f0ff;
+  --jarvis-blue: #0066ff;
+}
+
+[data-theme="dark"] {
+  --bg-app: #0a0a12;
+  --bg-surface: #12121e;
+  --text-primary: #e8e8f0;
+  --text-secondary: #9898b8;
+}
+
+/* Base styles for replication */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.titlebar {
+  height: 32px;
+  background: var(--titlebar-bg);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  -webkit-app-region: drag;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.titlebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+}
+
+.brand-icon {
+  color: var(--jarvis-cyan);
+  font-size: 14px;
+}
+
+.statusbar {
+  height: 24px;
+  background: var(--statusbar-bg);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-dot.connected {
+  background: var(--jarvis-green);
+  box-shadow: 0 0 6px var(--jarvis-green);
+}
+
+.status-dot.disconnected {
+  background: var(--jarvis-red);
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.content-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}

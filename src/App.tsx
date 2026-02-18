@@ -1,34 +1,19 @@
-import { useState } from "react"
 import { Navbar } from "./components/layout/Navbar"
 import { Footer } from "./components/layout/Footer"
 import { Hero } from "./sections/Hero"
-import { Services } from "./sections/Services"
-import { Portfolio } from "./sections/Portfolio"
-import { Skills } from "./sections/Skills"
-import { About } from "./sections/About"
-import { Contact } from "./sections/Contact"
-import { Certifications } from "./sections/Certifications"
-import { WorkingStation } from "./pages/WorkingStation"
+import { Projects } from "./sections/Projects"
 import { VectorAI } from "./components/layout/VectorAI"
+import { SpaceBackground } from './components/layout/SpaceBackground'
 
 function App() {
-  const [showWorkingStation, setShowWorkingStation] = useState(false)
-
-  if (showWorkingStation) {
-    return <WorkingStation onBack={() => setShowWorkingStation(false)} />
-  }
-
   return (
-    <div className="bg-brand-black min-h-screen w-full text-white selection:bg-brand-accent selection:text-brand-black">
+    <div className="min-h-screen w-full text-brand-text relative">
+      <SpaceBackground />
+
       <Navbar />
-      <main>
-        <Hero onStart={() => setShowWorkingStation(true)} />
-        <Services />
-        <Portfolio />
-        <Certifications />
-        <Skills />
-        <About />
-        <Contact onStart={() => setShowWorkingStation(true)} />
+      <main className="relative z-10">
+        <Hero />
+        <Projects />
       </main>
       <VectorAI />
       <Footer />

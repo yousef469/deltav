@@ -1,0 +1,300 @@
+:root {
+  --bg-dark: #000000;
+  --bg-card: #111111;
+  --accent-green: #00ff41;
+  /* Matrix/Survival Green */
+  --accent-red: #ff0000;
+  /* Emergency Red */
+  --accent-white: #ffffff;
+  --text-dim: #bbbbbb;
+  --border-dim: #333333;
+  --chess-light: #aaa;
+  /* Muted Silver */
+  --chess-dark: #1a1a1a;
+  /* Professional Charcoal */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-dark);
+  color: var(--accent-white);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 500px;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  position: relative;
+  padding: 15px;
+  border-left: 1px solid var(--border-dim);
+  border-right: 1px solid var(--border-dim);
+}
+
+/* Animations - Simplified for older hw */
+.animated {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--border-dim);
+  padding-bottom: 15px;
+}
+
+.header h1 {
+  font-size: 1.4rem;
+  letter-spacing: 5px;
+  color: var(--accent-green);
+  text-transform: uppercase;
+}
+
+.logo {
+  font-size: 3.5rem;
+  margin: 10px 0;
+}
+
+/* Compass HUD - Robust styling */
+.compass-hud {
+  position: fixed;
+  top: 80px;
+  right: 15px;
+  width: 80px;
+  height: 80px;
+  background: var(--bg-card);
+  border: 2px solid var(--accent-green);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+.compass-hud-needle {
+  font-size: 2.22rem;
+  color: var(--accent-white);
+}
+
+.compass-hud-text {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--accent-green);
+}
+
+/* Base Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.card:active {
+  background: #222;
+}
+
+.emergency-card {
+  border: 2px solid var(--accent-red);
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.vault-card {
+  border: 2px solid #ffcc00;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.ai-status {
+  font-size: 0.8rem;
+  color: var(--accent-green);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ai-response {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--accent-white);
+}
+
+/* Grid Components */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.grid-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.grid-icon {
+  font-size: 1.8rem;
+}
+
+.grid-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Overlays - Solid bg for older devices */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark);
+  z-index: 2000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.overlay-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--accent-green);
+  border-bottom: 1px solid var(--border-dim);
+  padding-bottom: 10px;
+}
+
+.overlay-red .overlay-title {
+  color: var(--accent-red);
+}
+
+.btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-white);
+  background: #111;
+  color: var(--accent-white);
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.btn-yes {
+  border: 2px solid var(--accent-red);
+  color: var(--accent-red);
+}
+
+.btn-no {
+  border: 2px solid #555;
+  color: #999;
+}
+
+/* Map */
+#map {
+  width: 100%;
+  height: 280px;
+  border-radius: 12px;
+  margin: 15px 0;
+  border: 1px solid var(--accent-green);
+  background: #111;
+}
+
+.coords-box {
+  background: #111;
+  padding: 12px;
+  border: 1px solid var(--border-dim);
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--accent-green);
+  margin-bottom: 10px;
+}
+
+/* Language Switcher in Nav Bar */
+.lang-switcher-nav .lang-btn {
+  background: #111;
+  border: 1px solid var(--border-dim);
+  color: #999;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.lang-switcher-nav .lang-btn.active {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  background: rgba(0, 255, 65, 0.1);
+}
+
+/* Local Info markers on map */
+.my-location-marker {
+  color: var(--accent-green);
+  font-size: 20px;
+  text-shadow: 0 0 5px var(--accent-green);
+}
+
+/* RTL Support */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl .lang-switcher {
+  right: auto;
+  left: 15px;
+}
+
+
+.manual-input-box {
+  border-top: 1px solid var(--border-dim);
+  padding: 15px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.manual-input-box input {
+  background: #111;
+  border: 1px solid var(--border-dim);
+  color: white;
+  flex: 1;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
